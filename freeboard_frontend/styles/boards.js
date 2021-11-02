@@ -6,7 +6,7 @@ export const BoardContainer = styled.div`
     margin: 100px auto 100px;
     padding:80px 102px;
     background: #fff;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);ß
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
 
 `
 
@@ -58,7 +58,7 @@ export const BoardContentsWrap = styled.div`
 export const BoardContents = styled.textarea`
     display:block;
     width:100%;
-    height:100%;
+    height: calc(100% - 32px);
     margin-top:16px;
     padding:16px;
     border:1px solid #bdbdbd;
@@ -136,6 +136,7 @@ export const ImageBox = styled.p`
     width:100%;
     height:100%;
     background:#bdbdbd;
+    cursor:pointer;
 
     &::before{
         content:'+';
@@ -165,7 +166,7 @@ export const MainTypeRadioWrap = styled.p`
 export const MainTypeRadiolist = styled.span`
     position:relative;
     display:inline-block;
-    width:70px;
+    width:80px;
     margin-right:20px;
 `
 export const MainTypeRadioLabel = styled.label`
@@ -234,4 +235,12 @@ export const SubmitBtn = styled.a`
     text-align:center;
     font-size:16px;
     
+`
+
+export const Errormessage = styled.span`
+    display:block;
+    padding:5px 0;
+    font-size:14px;
+    font-weight:400;
+    color:red;
 `

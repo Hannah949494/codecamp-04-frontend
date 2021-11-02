@@ -39,3 +39,8 @@ export const TextInput = styled.input`
     text-indent:5px;
 
 `
+
+export const BoardRequired = styled.span`
+    color:#ffd600
+
+`
