@@ -2,12 +2,30 @@
 
 import { BoardContainer, BoardContents, BoardContentsWrap, BoardLabel, BoardTitleSection, ColorPoint, Errormessage, HalfType, HalfTypeWrap, ImageBox, ImageBoxList, ImageBoxWrap, InputSection, MainTypeRadio, MainTypeRadioLabel, MainTypeRadiolist, MainTypeRadioWrap, SearchPostalCode, SearchPostalcodeBtn, SearchPostalcodeInput, SubmitBtn, SubmitBtnWrap, TextInput} from '../../../styles/boards'
 import { useState } from 'react'
+import { useMutation, gql } from '@apollo/client'
+
+const CREATE_BOARD = gql`
+    mutation createBoard ($createBoardInput : CreateBoardInput!){
+
+        createBoard( createBoardInput : $createBoardInput ) {
+            _id
+        }
+        
+    }
+
+`
 
 
     
 
 export default function BoardNew(){
 
+    const [createBoard] = useMutation(CREATE_BOARD)
+
+    async function newPost() {
+
+        
+    }
     const [writer, setWriter] = useState("")
     const [checknullwriter, setChecknullwirter] = useState("")
     const [password, setPassword] = useState("")
@@ -19,21 +37,33 @@ export default function BoardNew(){
 
     function putWriterdata(event){
         setWriter(event.target.value)
+        if(event.target.value !== ""){
+            setChecknullwirter("");
+        }
     }
 
     function putPassworddata(event){
         setPassword(event.target.value)
+        if(event.target.value !== ""){
+            setChecknullpassword("");
+        }
     }
 
     function putTitledata(event){
         setTitle(event.target.value)
+        if(event.target.value !== ""){
+            setChecknulltitle("");
+        }
     }
 
     function putWContentsdata(event){
         setContents(event.target.value)
+        if(event.target.value !== ""){
+            setChecknullcontents("");
+        }
     }
 
-    function checkNullinput(){
+    async function checkNullinput(){
 
         if(writer === ""){
 
@@ -58,6 +88,19 @@ export default function BoardNew(){
             setChecknullcontents("내용을 입력하세요.")
         
         }
+
+        const result = await createBoard({
+            variables : {
+                createBoardInput : {
+                    writer : writer,
+                    password : password,
+                    title : title,
+                    contents : contents
+                }
+            }
+        })
+
+        console.log(result)
 
     }
 
