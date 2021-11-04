@@ -73,7 +73,7 @@ export default function BoardNew(){
             <HalfTypeWrap>
                 <HalfType>
                     <div><BoardLabel>작성자 </BoardLabel><ColorPoint>*</ColorPoint></div>
-                    <TextInput type="text" placeholder ="이름을 적어주세요." onChange={putWriterdata} />
+                    <TextInput type="text" placeholder ="이름을 적어주세요." onChange={putWriterdata} /> 
                     <Errormessage>{checknullwriter}</Errormessage>
                 </HalfType>
                 <HalfType>
@@ -142,7 +142,7 @@ export default function BoardNew(){
                 </MainTypeRadioWrap>
             </InputSection>
             <SubmitBtnWrap>
-                <SubmitBtn href="#" onClick={checkNullinput} >등록하기</SubmitBtn>
+                <SubmitBtn href="#" onClick={checkNullinput}>등록하기</SubmitBtn>
             </SubmitBtnWrap>
 
         </BoardContainer>
