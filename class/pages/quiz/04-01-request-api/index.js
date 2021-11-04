@@ -18,9 +18,9 @@ mutation createProduct($seller : String, $createProductInput : CreateProductInpu
 export default function GraphqlMutationProductPage(){
     
     const [seller,Setseller] = useState("")
-    const [product_name, Setproductname] = useState("")
-    const [product_detail, Setproductdetail] = useState("")
-    const [product_price, Setproductprice] = useState("")
+    const [product_name, Setproduct_name] = useState("")
+    const [product_detail, Setproduct_detail] = useState("")
+    const [product_price, Setproduct_price] = useState("")
 
     const [createProduct] = useMutation(CREATE_PRODUCT)
 
@@ -29,15 +29,15 @@ export default function GraphqlMutationProductPage(){
     }
 
     function onChangeProductName(e){
-        Setproductname(e.target.value)
+        Setproduct_name(e.target.value)
     }
 
     function onChangeProductDetail(e){
-        Setproductdetail(e.target.value)
+        Setproduct_detail(e.target.value)
     }
 
     function onChangeProductPrice(e){
-        Setproductprice(e.target.value)
+        Setproduct_price(e.target.value)
     }
     
     
