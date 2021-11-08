@@ -13,19 +13,11 @@ const CREATE_BOARD = gql`
         
     }
 
-`
-
-
-    
+`    
 
 export default function BoardNew(){
 
     const [createBoard] = useMutation(CREATE_BOARD)
-
-    async function newPost() {
-
-        
-    }
     const [writer, setWriter] = useState("")
     const [checknullwriter, setChecknullwirter] = useState("")
     const [password, setPassword] = useState("")
