@@ -3,6 +3,7 @@
 import { BoardContainer, BoardContents, BoardContentsWrap, BoardLabel, BoardTitleSection, ColorPoint, Errormessage, HalfType, HalfTypeWrap, ImageBox, ImageBoxList, ImageBoxWrap, InputSection, MainTypeRadio, MainTypeRadioLabel, MainTypeRadiolist, MainTypeRadioWrap, SearchPostalCode, SearchPostalcodeBtn, SearchPostalcodeInput, SubmitBtn, SubmitBtnWrap, TextInput} from '../../../styles/boards'
 import { useState } from 'react'
 import { useMutation, gql } from '@apollo/client'
+import { useRouter } from 'next/router'
 
 const CREATE_BOARD = gql`
     mutation createBoard ($createBoardInput : CreateBoardInput!){
@@ -16,7 +17,7 @@ const CREATE_BOARD = gql`
 `    
 
 export default function BoardNew(){
-
+    const router = useRouter()
     const [createBoard] = useMutation(CREATE_BOARD)
     const [writer, setWriter] = useState("")
     const [checknullwriter, setChecknullwirter] = useState("")
@@ -26,6 +27,12 @@ export default function BoardNew(){
     const [checknulltitle, setChecknulltitle] = useState("")    
     const [contents, setContents] = useState("")
     const [checknullcontents, setChecknullcontents] = useState("")
+    const [myInputs, setMyInputs] = useState({
+        writer : "",
+        password : "",
+        title : "",
+        content: ""
+    })
 
     function putWriterdata(event){
         setWriter(event.target.value)
@@ -81,18 +88,20 @@ export default function BoardNew(){
         
         }
 
-        const result = await createBoard({
-            variables : {
-                createBoardInput : {
-                    writer : writer,
-                    password : password,
-                    title : title,
-                    contents : contents
+        if (writer && password && title && contents){
+            const result = await createBoard({
+                variables : {
+                    createBoardInput : {
+                        writer : writer,
+                        password : password,
+                        title : title,
+                        contents : contents
+                    }
                 }
-            }
-        })
-
-        console.log(result)
+            })
+            router.push(`/boards/${result.data.createBoard._id}`)
+            
+        }
 
     }
 
@@ -102,12 +111,12 @@ export default function BoardNew(){
         <>
         <BoardContainer>
             <BoardTitleSection>
-            <h1>게시물 수정</h1>
+            <h1>게시물 작성</h1>
             </BoardTitleSection>
             
             <HalfTypeWrap>
                 <HalfType>
-                    <div><BoardLabel>작성자 </BoardLabel><ColorPoint>*</ColorPoint></div>
+                    <div><BoardLabel>작성자 <ColorPoint>*</ColorPoint></BoardLabel></div>
                     <TextInput type="text" placeholder ="이름을 적어주세요." onChange={putWriterdata} /> 
                     <Errormessage>{checknullwriter}</Errormessage>
                 </HalfType>
@@ -167,11 +176,11 @@ export default function BoardNew(){
                 <BoardLabel>메인 설정</BoardLabel>
                 <MainTypeRadioWrap>
                     <MainTypeRadiolist>
-                        <MainTypeRadio type="checkbox" id="Youtube" name="check-box-button"/>
+                        <MainTypeRadio type="radio" id="Youtube" name="check-box-button"/>
                         <MainTypeRadioLabel htmlFor="Youtube"><span>유튜브</span></MainTypeRadioLabel>
                     </MainTypeRadiolist>
                     <MainTypeRadiolist>
-                        <MainTypeRadio type="checkbox" id="Photos" name="check-box-button" />
+                        <MainTypeRadio type="radio" id="Photos" name="check-box-button" />
                         <MainTypeRadioLabel htmlFor="Photos"><span>사진</span></MainTypeRadioLabel>
                     </MainTypeRadiolist>
                 </MainTypeRadioWrap>

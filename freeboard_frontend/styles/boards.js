@@ -1,9 +1,13 @@
 import styled from '@emotion/styled'
+import { UserCircle } from '@emotion-icons/fa-solid'
 
+export const Container = styled.div`
+    padding:20px;
+`
 export const BoardContainer = styled.div`
     width: 100%;
     max-width: 1200px;
-    margin: 100px auto 100px;
+    margin: 100px auto 30px;
     padding:80px 102px;
     background: #fff;
     box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
@@ -14,6 +18,11 @@ export const BoardTitleSection = styled.div`
     width:100%;
     padding-bottom:80px;
     text-align:center;
+
+    h1{
+        font-size:2.25rem;
+        font-weight:bold;
+    }
 
 `
 
@@ -42,12 +51,17 @@ export const HalfType = styled.div`
 export const TextInput = styled.input`
     width:100%;
     height: 52px;
-    margin-top:16px;
+    margin-bottom:16px;
     border:1px solid #bdbdbd;
     text-indent:16px;
+    outline:none;
 
     &::placeholder{
         color:#bdbdbd;
+    }
+    &:focus{
+        border-width:0 0 2px 0;
+        
     }
 `
 
@@ -66,6 +80,7 @@ export const BoardContents = styled.textarea`
     line-height:1.5;
     white-space:pre-line;
     words-break:break-all;
+    outline:none;
 
     &::placeholder{
         color:#bdbdbd;
@@ -77,6 +92,7 @@ export const BoardContents = styled.textarea`
 
 
 export const BoardLabel = styled.label`
+    display:block;
     font-size:1rem;
     margin-bottom:16px;
 `
@@ -86,10 +102,12 @@ export const ColorPoint = styled.span`
 `
 
 export const SearchPostalCode = styled.p`
-    display:block;
+    display:flex;
+    align-items:center;
     width:100%;
     margin:0;
     padding-top:16px;
+    margin-bottom:16px;
 
 `
 
@@ -113,12 +131,13 @@ export const SearchPostalcodeInput = styled.input`
     &::placeholder{
         color:#bdbdbd;
     }
+
 `
 
 export const ImageBoxWrap = styled.ul`
     display:flex;
     flex-wrap:wrap;
-    padding: 0;
+    padding-top:20px;
     
 `
 
@@ -171,7 +190,6 @@ export const MainTypeRadiolist = styled.span`
 `
 export const MainTypeRadioLabel = styled.label`
     
-
 `
 
 
@@ -243,4 +261,85 @@ export const Errormessage = styled.span`
     font-size:14px;
     font-weight:400;
     color:red;
+`
+// Board Detail
+
+export const BoardContsTitle = styled.h2`
+    display:block;
+    width:80%;
+    padding:10px 0;
+    font-size:2.25rem;
+    color:#333;
+    text-align:left;
+
+    
+`
+
+export const BoardContsProfileWrap = styled.div`
+    display:flex;
+    align-items:center;
+    width:100%;
+    padding:5px 0;
+    border-bottom:1px solid #ccc;
+`
+export const UserImage = styled(UserCircle)`
+    width:40px;
+    height:40px;
+    color:#ddd;
+`
+export const UserInfoWrap = styled.div`
+    width:17%;
+    align-self:flex-end;
+    padding:10px;
+    text-align:left;
+`
+export const UserName = styled.h4`
+    font-size:15px;
+    font-weight:500;
+    color:#555;
+`
+export const DateofWrite = styled.span`
+    display:block;
+    padding-top:5px;
+    font-size:14px;
+    font-weight:500;
+    color:#ececec;
+
+`
+export const ContentsWrap = styled.div`
+    padding:70px 0;
+`
+export const ImageSliderWrap = styled.div`
+    img{
+        width:100%;
+    }
+`
+export const ContentText = styled.div`
+    padding:70px 0;
+    font-size:18px;
+    color:#111;
+    word-break:keep-all;
+    line-height:1.5;
+`
+export const YoutubeWrap = styled.div`
+    // padding:70px 0;
+    text-align:center;
+`
+
+export const ButtonWrap = styled.div`
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:30px 0 30px;
+`
+export const BoardButton = styled.button`
+    border:1px solid #ddd;
+    background: #f1f1f1;
+    width:180px;
+    height:45px;
+    margin: 0 3%;
+    text-align:center;
+    font-size:16px;
+    color:#333;
+    cursor:pointer;
 `

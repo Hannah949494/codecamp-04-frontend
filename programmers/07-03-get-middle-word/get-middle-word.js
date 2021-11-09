@@ -8,3 +8,16 @@ function solution(s) {
     }
     return answer;
 }
+function solution(s) {
+
+    let center = Math.floor(s.length / 2);
+    let answer = s[center];
+
+    if ( s.length % 2 === 0){
+
+        answer = s[center - 1] + s[center]
+
+    }
+
+    return answer;
+}
