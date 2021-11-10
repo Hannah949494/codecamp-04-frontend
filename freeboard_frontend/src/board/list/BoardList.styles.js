@@ -1,6 +1,9 @@
 import styled from "@emotion/styled"
 
 export const ListWrapper = styled.div`
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
     padding:100px 50px;
 
 `
@@ -100,9 +103,6 @@ export const BoardDate = styled.div`
 export const BoardDelete = styled.div`
     width:150px;
 `
-
-export const BoardListButton
-
 export const BoardList = styled.li`
     display:table;
     width:100%;
@@ -115,7 +115,7 @@ export const BoardList = styled.li`
         font-size:15px;
     }
     &:nth-child(odd){
-        background:#f1f1f1;
+        background:#ececec;
     }
 
     &:hover{
