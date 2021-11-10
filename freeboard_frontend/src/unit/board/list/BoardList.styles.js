@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { Pen, Heart } from '@emotion-icons/fa-solid'
 
 export const ListWrapper = styled.div`
     width:100%;
@@ -16,6 +17,7 @@ export const BestListWRap = styled.ul`
 export const BestListCard = styled.li`
     width:25%;
     padding:0 10px;
+    cursor: pointer;
 `
 
 export const BestListConts = styled.figure`
@@ -46,8 +48,13 @@ export const BestContsTxt = styled.figcaption`
     padding:20px;
 `
 
-export const BestContsWriter = styled.h6`
+export const BestContsTitle = styled.h5`
     font-size:18px;
+`
+
+export const BestContsWriter = styled.h6`
+    padding-top:10px;
+    font-size:15px;
     font-weight:bold;
     color:#333;
 
@@ -55,10 +62,24 @@ export const BestContsWriter = styled.h6`
 
 export const BestContsDate = styled.span`
     display:block;
-    padding-top:5px;
-    font-size:13px;
+    padding-top:10px;
+    font-size:14px;
     font-weight:500;
-    color:#ddd;
+    color:#333;
+`
+export const BestLikeWrap = styled.figure`
+    display:inline-block;
+    text-align:center;
+`
+export const BestLikeTxt = styled.figcaption`
+    padding-top:5px;
+    font-size:12px;
+    color:#111;
+`
+export const BestLikeIco = styled(Heart)`
+    width:20px;
+    height:20px;
+    color:#ffd600;
 `
 
 export const BestContsContents = styled.p`
@@ -66,6 +87,10 @@ export const BestContsContents = styled.p`
     font-size:16px;
     font-weight:500;
     color:#111;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 `
 
 export const BoardListWrap = styled.ul`
@@ -108,6 +133,7 @@ export const BoardList = styled.li`
     width:100%;
     padding:7px 0;
     border-bottom:1px solid #ececec;
+    cursor: pointer;
 
     div{
         display:table-cell;
@@ -123,4 +149,45 @@ export const BoardList = styled.li`
         color:#fff;
         transition: all .2s;
     }
+`
+export const WriteButtonWrap = styled.p`
+    position:relative;
+    display:inline-block;
+    float:right;
+
+    &:hover{
+
+        svg{
+            color:#fff;
+        }
+
+        button{
+            background:#111;
+            color:#fff;
+        }
+    }
+`
+export const WriteButton = styled.button`
+    position:relative;
+    width:170px;
+    height:50px;    
+    padding-left:40px;
+    padding-right:20px;
+    margin-top:20px;
+    background:transparent;
+    border:1px solid #ececec;
+    outline:none;
+    font-size:14px;
+
+`
+
+export const WriteButtonIco = styled(Pen)`
+    position:absolute;
+    top:50%;
+    left:20px;
+    width:20px;
+    height:20px;
+    color:#111;
+    z-index:2;
+
 `

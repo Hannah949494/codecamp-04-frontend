@@ -1,0 +1,137 @@
+import { useState } from "react"
+import { useMutation } from "@apollo/client"
+import { useRouter } from "next/router"
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.quries"
+import BoardWirteUI from "./BoardWrite.presenter"
+
+export default function BoardWrite(props){
+    
+    const router = useRouter()
+    const [createBoard] = useMutation(CREATE_BOARD)
+    const [updateBoard] = useMutation(UPDATE_BOARD)
+    const [writer, setWriter] = useState("")
+    const [checknullwriter, setChecknullwirter] = useState("")
+    const [password, setPassword] = useState("")
+    const [checknullpassword, setChecknullpassword] = useState("")
+    const [title, setTitle] = useState("")
+    const [checknulltitle, setChecknulltitle] = useState("")    
+    const [contents, setContents] = useState("")
+    const [checknullcontents, setChecknullcontents] = useState("")
+    const [myInputs, setMyInputs] = useState({
+        writer : "",
+        password : "",
+        title : "",
+        content: ""
+    })
+
+    function putWriterdata(event){
+        setWriter(event.target.value)
+        if(event.target.value !== ""){
+            setChecknullwirter("");
+        }
+    }
+
+    function putPassworddata(event){
+        setPassword(event.target.value)
+        if(event.target.value !== ""){
+            setChecknullpassword("");
+        }
+    }
+
+    function putTitledata(event){
+        setTitle(event.target.value)
+        if(event.target.value !== ""){
+            setChecknulltitle("");
+        }
+    }
+
+    function putWContentsdata(event){
+        setContents(event.target.value)
+        if(event.target.value !== ""){
+            setChecknullcontents("");
+        }
+    }
+
+    async function checkNullinput(){
+
+        if(writer === ""){
+
+            setChecknullwirter("작성자명을 입력하세요.")
+        
+        }
+
+        if(password === ""){
+
+            setChecknullpassword("비밀번호를 입력하세요.")
+        
+        }
+
+        if(title === ""){
+
+            setChecknulltitle("제목을 입력하세요.")
+        
+        }
+
+        if(contents === ""){
+
+            setChecknullcontents("내용을 입력하세요.")
+        
+        }
+
+        if (writer && password && title && contents){
+            const result = await createBoard({
+                variables : {
+                    createBoardInput : {
+                        writer : writer,
+                        password : password,
+                        title : title,
+                        contents : contents
+                    }
+                }
+            })
+            router.push(`/boards/detail/${result.data.createBoard._id}`)
+            
+        }
+
+    }
+
+    async function updateBoardContent(){ // 수정하기
+        try{
+        const result = await updateBoard({
+            variables : {
+                boardId : router.query.boardId,
+                updateBoardInput : {
+                    title : title,
+                    contents : contents
+                },
+                password : password
+                
+            }
+        })
+        alert('게시물 수정이 완료되었습니다.')
+        router.push(`/boards/detail/${router.query.boardId}`)
+    }
+    catch{
+        alert("실패")
+    }
+
+    }
+
+    return(
+        <BoardWirteUI 
+            putWriterdata = {putWriterdata}
+            putPassworddata = {putPassworddata}
+            putTitledata = {putTitledata}
+            putWContentsdata = {putWContentsdata}
+            checkNullinput = {checkNullinput}
+            checknullwriter = {checknullwriter}
+            checknulltitle = {checknulltitle}
+            checknullpassword = {checknullpassword}
+            checknullcontents = {checknullcontents}
+            updateBoardContent = {updateBoardContent}
+            isEdit = {props.isEdit}
+        />
+
+    )
+
+}
