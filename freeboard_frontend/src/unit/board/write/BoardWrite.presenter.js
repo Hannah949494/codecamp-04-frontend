@@ -1,7 +1,7 @@
 import { BoardContainer, BoardContents, BoardContentsWrap, BoardLabel, BoardTitleSection, ColorPoint, Errormessage, HalfType, HalfTypeWrap, ImageBox, ImageBoxList, ImageBoxWrap, InputSection, MainTypeRadio, MainTypeRadioLabel, MainTypeRadiolist, MainTypeRadioWrap, SearchPostalCode, SearchPostalcodeBtn, SearchPostalcodeInput, SubmitBtn, SubmitBtnWrap, TextInput} from '../../../../styles/boards'
 
 export default function BoardWirteUI(props){
-
+    console.log(props.data)
     return (
     <>
         <BoardContainer>
@@ -9,30 +9,30 @@ export default function BoardWirteUI(props){
             {!props.isEdit && <h1>게시글 작성하기</h1> }
             {props.isEdit && <h1>게시글 수정하기</h1> }
             </BoardTitleSection>
-            
+
             <HalfTypeWrap>
                 <HalfType>
                     <div><BoardLabel>작성자 <ColorPoint>*</ColorPoint></BoardLabel></div>
-                    <TextInput type="text" placeholder ="이름을 적어주세요." onChange={props.putWriterdata} /> 
+                    <TextInput type="text" placeholder ="이름을 적어주세요." onChange={props.putWriterdata} defaultValue={props.data?.fetchBoard.writer} /> 
                     <Errormessage>{props.checknullwriter}</Errormessage>
                 </HalfType>
                 <HalfType>
                     <BoardLabel>비밀번호</BoardLabel>
-                    <TextInput type="password" placeholder="비밀번호를 입력해주세요." onChange={props.putPassworddata}/>
+                    <TextInput type="password" placeholder="비밀번호를 입력해주세요." onChange={props.putPassworddata} />
                     <Errormessage>{props.checknullpassword}</Errormessage>
                 </HalfType>
             </HalfTypeWrap>
             
             <InputSection>
                 <BoardLabel>제목</BoardLabel>
-                <TextInput type="text" placeholder="제목을 작성해주세요." onChange={props.putTitledata}/>
+                <TextInput type="text" placeholder="제목을 작성해주세요." onChange={props.putTitledata}  defaultValue={props.data?.fetchBoard.title} />
                 <Errormessage>{props.checknulltitle}</Errormessage>
             </InputSection>
             
             <InputSection>
                 <BoardContentsWrap>
                     <BoardLabel>내용</BoardLabel>
-                    <BoardContents placeholder ="내용을 입력해주세요." onChange={props.putWContentsdata} ></BoardContents>
+                    <BoardContents placeholder ="내용을 입력해주세요." onChange={props.putWContentsdata}  defaultValue={props.data?.fetchBoard.contents}></BoardContents>
                     <Errormessage>{props.checknullcontents}</Errormessage>
                 </BoardContentsWrap>
             </InputSection>

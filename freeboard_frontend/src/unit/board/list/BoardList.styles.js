@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { Pen, Heart } from '@emotion-icons/fa-solid'
-
+import {faAd} from '@fortawesome/free-solid-svg-icons'
 export const ListWrapper = styled.div`
     width:100%;
     max-width:1200px;
@@ -50,6 +50,9 @@ export const BestContsTxt = styled.figcaption`
 
 export const BestContsTitle = styled.h5`
     font-size:18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 
 export const BestContsWriter = styled.h6`
@@ -96,7 +99,7 @@ export const BestContsContents = styled.p`
 export const BoardListWrap = styled.ul`
     width:100%;
     margin-top:50px;
-    
+
 `
 
 export const BoardListType = styled.li`
@@ -178,6 +181,18 @@ export const WriteButton = styled.button`
     border:1px solid #ececec;
     outline:none;
     font-size:14px;
+
+    ::before{
+        content: "\f007";
+        position:absolute;
+        top:0;
+        right:0;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        width:30px;
+        height:50px;
+        
+    }
 
 `
 

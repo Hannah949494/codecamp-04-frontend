@@ -96,17 +96,33 @@ export default function BoardWrite(props){
     }
 
     async function updateBoardContent(){ // 수정하기
+
+        const Variables = {
+            boardId : router.query.boardId,
+            password : password,
+            updateBoardInput : {}
+        }
+        if(writer !== "" ) Variables.updateBoardInput.writer = writer
+        if(title !== "" ) Variables.updateBoardInput.title = title
+        if(contents !== "") Variables.updateBoardInput.contents = contents
+        
+        console.log(router.query.boardId)
+
         try{
-        const result = await updateBoard({
-            variables : {
-                boardId : router.query.boardId,
-                updateBoardInput : {
-                    title : title,
-                    contents : contents
-                },
-                password : password
+        // const result = await updateBoard({
+        //     variables : {
+        //         boardId : router.query.boardId,
+        //         updateBoardInput : {
+        //             title : title,
+        //             contents : contents
+        //         },
+        //         password : password
                 
-            }
+        //     }
+        // })
+        const result = await updateBoard({
+            variables: Variables    
+                    
         })
         alert('게시물 수정이 완료되었습니다.')
         router.push(`/boards/detail/${router.query.boardId}`)
@@ -130,6 +146,7 @@ export default function BoardWrite(props){
             checknullcontents = {checknullcontents}
             updateBoardContent = {updateBoardContent}
             isEdit = {props.isEdit}
+            data = {props.data}
         />
 
     )
