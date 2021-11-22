@@ -84,8 +84,8 @@ export default function BoardWirteUI(props : WriteContainer){
                 </MainTypeRadioWrap>
             </InputSection>
             <SubmitBtnWrap>
-                {!props.isEdit && <SubmitBtn href="#" onClick={props.checkNullinput}>등록하기</SubmitBtn>}
-                {props.isEdit && <SubmitBtn href="#" onClick={props.updateBoardContent}>수정하기</SubmitBtn> }
+                {!props.isEdit && <SubmitBtn href="#"  isActive={props.isEdit ? true : !props.isActive} onClick={props.checkNullinput}>등록하기</SubmitBtn>}
+                {props.isEdit && <SubmitBtn href="#"  isActive={props.isEdit ? true : !props.isActive} onClick={props.updateBoardContent} >수정하기</SubmitBtn> }
             </SubmitBtnWrap>
 
         </BoardContainer>

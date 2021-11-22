@@ -24,4 +24,8 @@ export interface WriteContainer {
     updateBoardContent : () => void
     isEdit : boolean
     data : any
+    isActive : boolean
 }
+export interface ISubmitButtonProps {
+    isActive: boolean
+  }

@@ -19,6 +19,7 @@ export default function BoardWrite(props:CheckTypeProps){
     const [checknulltitle, setChecknulltitle] = useState("")    
     const [contents, setContents] = useState("")
     const [checknullcontents, setChecknullcontents] = useState("")
+    const [isActive, setIsActive] = useState(false);
     const [myInputs, setMyInputs] = useState({
         writer : "",
         password : "",
@@ -31,12 +32,34 @@ export default function BoardWrite(props:CheckTypeProps){
         if(event.target.value !== ""){
             setChecknullwirter("");
         }
+
+        if (
+            writer !== "" &&
+            event.target.value !== "" &&
+            contents !== "" &&
+            password !== "") {
+            setIsActive(true); 
+        } 
+            else {
+            setIsActive(false);
+        }
     }
 
     function putPassworddata(event:ChangeEvent<HTMLInputElement>){
         setPassword(event.target.value)
         if(event.target.value !== ""){
             setChecknullpassword("");
+        }
+
+        if (
+            writer !== "" &&
+            event.target.value !== "" &&
+            contents !== "" &&
+            password !== "") {
+            setIsActive(true); 
+        } 
+            else {
+            setIsActive(false);
         }
     }
 
@@ -45,12 +68,34 @@ export default function BoardWrite(props:CheckTypeProps){
         if(event.target.value !== ""){
             setChecknulltitle("");
         }
+
+        if (
+            writer !== "" &&
+            event.target.value !== "" &&
+            contents !== "" &&
+            password !== "") {
+            setIsActive(true); 
+        } 
+            else {
+            setIsActive(false);
+        }
     }
 
     function putWContentsdata(event:ChangeEvent<HTMLInputElement>){
         setContents(event.target.value)
         if(event.target.value !== ""){
             setChecknullcontents("");
+        }
+
+        if (
+            writer !== "" &&
+            event.target.value !== "" &&
+            contents !== "" &&
+            password !== "") {
+            setIsActive(true); 
+        } 
+            else {
+            setIsActive(false);
         }
     }
 
@@ -139,6 +184,7 @@ export default function BoardWrite(props:CheckTypeProps){
             updateBoardContent = {updateBoardContent}
             isEdit = {props.isEdit}
             data = {props.data}
+            isActive={isActive}
         />
 
     )

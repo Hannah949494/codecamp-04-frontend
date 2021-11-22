@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { UserCircle } from '@emotion-icons/fa-solid'
+import { ISubmitButtonProps } from '../src/unit/board/write/BoardWriteTypes'
 
 export const Container = styled.div`
     padding:20px;
@@ -185,7 +186,7 @@ export const MainTypeRadioWrap = styled.p`
 export const MainTypeRadiolist = styled.span`
     position:relative;
     display:inline-block;
-    width:80px;
+    width:90px;
     margin-right:20px;
 `
 export const MainTypeRadioLabel = styled.label`
@@ -249,9 +250,12 @@ export const SubmitBtnWrap = styled.p`
 export const SubmitBtn = styled.a`
     display:inline-block;
     padding:14px 60px;
-    background:#ffd600;
     text-align:center;
     font-size:16px;
+    background-color: ${(props: ISubmitButtonProps) => props.isActive ? '#ddd' : '#ffd600'};
+    &:hover {
+      cursor: ${(props: ISubmitButtonProps) => props.isActive ? 'default' : 'pointer'};
+    }
     
 `
 
