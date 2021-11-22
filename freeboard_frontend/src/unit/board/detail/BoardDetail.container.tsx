@@ -28,11 +28,11 @@ export default function BoardDetail(){
             console.log(NewTime)
             NewDataContainer = NewData + " " + NewTime
  
-        function MoveToList(e){
+        function MoveToList(){
             router.push('/boards/list')
         }
 
-        function MoveToEditPage(event){
+        function MoveToEditPage(){
             router.push(`/boards/detail/${router.query.boardId}/edit`)
         }
 
@@ -42,7 +42,7 @@ export default function BoardDetail(){
                 variables: { boardId : router.query.boardId},
             })
                 router.push('/boards/list')
-            alert("삭제성공")
+            alert("게시글이 삭제되었습니다.")
         }catch{alert("실패")}
     }
     return (

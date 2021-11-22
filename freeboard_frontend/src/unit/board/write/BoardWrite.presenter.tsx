@@ -1,6 +1,8 @@
 import { BoardContainer, BoardContents, BoardContentsWrap, BoardLabel, BoardTitleSection, ColorPoint, Errormessage, HalfType, HalfTypeWrap, ImageBox, ImageBoxList, ImageBoxWrap, InputSection, MainTypeRadio, MainTypeRadioLabel, MainTypeRadiolist, MainTypeRadioWrap, SearchPostalCode, SearchPostalcodeBtn, SearchPostalcodeInput, SubmitBtn, SubmitBtnWrap, TextInput} from '../../../../styles/boards'
+import { CheckTypeProps, WriteContainer } from './BoardWriteTypes'
 
-export default function BoardWirteUI(props){
+
+export default function BoardWirteUI(props : WriteContainer){
     console.log(props.data)
     return (
     <>

@@ -3,8 +3,10 @@ import { useMutation } from "@apollo/client"
 import { useRouter } from "next/router"
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.quries"
 import BoardWirteUI from "./BoardWrite.presenter"
+import { ChangeEvent } from "react"
+import { CheckTypeProps, IVariables, WriteContainer } from "./BoardWriteTypes"
 
-export default function BoardWrite(props){
+export default function BoardWrite(props:CheckTypeProps){
     
     const router = useRouter()
     const [createBoard] = useMutation(CREATE_BOARD)
@@ -24,28 +26,28 @@ export default function BoardWrite(props){
         content: ""
     })
 
-    function putWriterdata(event){
+    function putWriterdata(event:ChangeEvent<HTMLInputElement>){
         setWriter(event.target.value)
         if(event.target.value !== ""){
             setChecknullwirter("");
         }
     }
 
-    function putPassworddata(event){
+    function putPassworddata(event:ChangeEvent<HTMLInputElement>){
         setPassword(event.target.value)
         if(event.target.value !== ""){
             setChecknullpassword("");
         }
     }
 
-    function putTitledata(event){
+    function putTitledata(event:ChangeEvent<HTMLInputElement>){
         setTitle(event.target.value)
         if(event.target.value !== ""){
             setChecknulltitle("");
         }
     }
 
-    function putWContentsdata(event){
+    function putWContentsdata(event:ChangeEvent<HTMLInputElement>){
         setContents(event.target.value)
         if(event.target.value !== ""){
             setChecknullcontents("");
@@ -109,17 +111,7 @@ export default function BoardWrite(props){
         console.log(router.query.boardId)
 
         try{
-        // const result = await updateBoard({
-        //     variables : {
-        //         boardId : router.query.boardId,
-        //         updateBoardInput : {
-        //             title : title,
-        //             contents : contents
-        //         },
-        //         password : password
-                
-        //     }
-        // })
+
         const result = await updateBoard({
             variables: Variables    
                     

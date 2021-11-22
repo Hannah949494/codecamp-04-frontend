@@ -1,6 +1,7 @@
 import * as B from './BoardList.styles'
+import { IBoardListUIProps } from './BoardListTypes'
 
-export default function BoardListUI(props){
+export default function BoardListUI(props:IBoardListUIProps){
     return(
         <B.ListWrapper>
         <B.BestListWRap>

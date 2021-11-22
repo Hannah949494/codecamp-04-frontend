@@ -15,7 +15,6 @@ export default function BoardWriteTypeScript(props){
     const [contents, setContents] = useState("")
     const [createBoard] = useMutation(CREATE_BOARD)
     const [updateBoard] = useMutation(UPDATE_BOARD)
-   
 
     function onChangeWriter(e:ChangeEvent<HTMLInputElement>){
         setWriter(e.target.value)

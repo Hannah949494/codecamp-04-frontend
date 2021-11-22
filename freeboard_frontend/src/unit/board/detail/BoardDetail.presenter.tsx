@@ -1,7 +1,8 @@
 import Slider from 'react-slick'
 import { BoardButton, BoardContainer, BoardContsProfileWrap, BoardContsTitle, ButtonWrap, Container, ContentsWrap, ContentText, DateofWrite, ImageSliderWrap, ProfileImg, UserImage, UserInfoWrap, UserName, YoutubeWrap,  } from "../../../../styles/boards"
+import { IBoardDetailUIProps } from './BoardDetailTypes'
 
-export default function BoardDetailUI(props){
+export default function BoardDetailUI(props: IBoardDetailUIProps){
     
     return(
         <Container>
