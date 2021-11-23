@@ -81,7 +81,7 @@ export default function BoardWrite(props:CheckTypeProps){
         }
     }
 
-    function putWContentsdata(event:ChangeEvent<HTMLInputElement>){
+    function putWContentsdata(event:ChangeEvent<HTMLTextAreaElement>){
         setContents(event.target.value)
         if(event.target.value !== ""){
             setChecknullcontents("");

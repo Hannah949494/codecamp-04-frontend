@@ -17,10 +17,10 @@ export interface WriteContainer {
     putTitledata : (event: ChangeEvent<HTMLInputElement>) => void
     putWContentsdata : (event: ChangeEvent<HTMLTextAreaElement>) => void
     checkNullinput : () => void
-    checknullwriter : () => void
-    checknulltitle : () => void
-    checknullpassword : () => void
-    checknullcontents : () => void
+    checknullwriter : String
+    checknulltitle : String
+    checknullpassword : String
+    checknullcontents : String
     updateBoardContent : () => void
     isEdit : boolean
     data : any
