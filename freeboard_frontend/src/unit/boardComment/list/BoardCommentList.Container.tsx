@@ -1,19 +1,20 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { IQuery, IQueryFetchBoardCommentsArgs } from "../../../commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchBoardCommentsArgs,
+} from "../../../commons/types/generated/types";
 import BoardCommentListUI from "./BoardCommentList.presenter";
 import { FETCH_BOARD_COMMENTS } from "./BoardCommentList.quries";
-export default function BoardCommentList() {
-  const router = useRouter()
-  const {data, fetchMore} = useQuery<
-    Pick<IQuery, "fetchBoardComments">,
-    IQueryFetchBoardCommentsArgs  
-  >(FETCH_BOARD_COMMENTS, {
-      variables: {
-          boardId : String(router.query.boardId)
 
-      }
-  })
+export default function BoardCommentList() {
+  const router = useRouter();
+  const { data, fetchMore } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENTS, {
+    variables: { boardId: String(router.query.boardId) },
+  });
 
   function onLoadMore() {
     if (!data) return;
@@ -33,8 +34,5 @@ export default function BoardCommentList() {
     });
   }
 
-  return <BoardCommentListUI 
-    data = {data}
-    onLoadMore ={onLoadMore}
-  />;
+  return <BoardCommentListUI data={data} onLoadMore={onLoadMore} />;
 }

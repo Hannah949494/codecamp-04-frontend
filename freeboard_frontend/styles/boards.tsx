@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { UserCircle } from "@emotion-icons/fa-solid";
+import { UserCircle, ThumbsUp, ThumbsDown } from "@emotion-icons/fa-solid";
 import { ISubmitButtonProps } from "../src/unit/board/write/BoardWriteTypes";
 
 export const DetailContainer = styled.div`
@@ -327,4 +327,25 @@ export const BoardButton = styled.button`
   font-size: 16px;
   color: #333;
   cursor: pointer;
+`;
+
+export const LikeSection = styled.div`
+  padding: 20px 0;
+  text-align: center;
+`;
+
+export const LikeWrap = styled.figure`
+  display: inline-block;
+`;
+
+export const LikeIco = styled(ThumbsUp)`
+  width: 25px;
+  height: 25px;
+  color: #ffd600;
+`;
+
+export const DisLikeIco = styled(ThumbsDown)`
+  width: 25px;
+  height: 25px;
+  color: #ddd;
 `;
