@@ -307,7 +307,7 @@ export const ContentText = styled.div`
   line-height: 1.5;
 `;
 export const YoutubeWrap = styled.div`
-  // padding:70px 0;
+  padding: 40px 0;
   text-align: center;
 `;
 
@@ -330,12 +330,18 @@ export const BoardButton = styled.button`
 `;
 
 export const LikeSection = styled.div`
-  padding: 20px 0;
+  padding-top: 70px;
   text-align: center;
 `;
 
 export const LikeWrap = styled.figure`
   display: inline-block;
+  padding: 0 30px;
+
+  figcaption {
+    padding-top: 10px;
+    font-size: 16px;
+  }
 `;
 
 export const LikeIco = styled(ThumbsUp)`

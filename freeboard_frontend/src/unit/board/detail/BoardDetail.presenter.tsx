@@ -1,4 +1,5 @@
 import Slider from "react-slick";
+import ReactPlayer from "react-player";
 import {
   BoardButton,
   BoardContainer,
@@ -56,15 +57,13 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
           </Slider>
           <ContentText>{props.data?.fetchBoard.contents}</ContentText>
           <YoutubeWrap>
-            <iframe
-              width="70%"
-              height="450"
-              src="https://www.youtube.com/embed/j9DsLrVkj4E"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+            {props.data?.fetchBoard.youtubeUrl && (
+              <ReactPlayer
+                url={props.data?.fetchBoard.youtubeUrl}
+                width="100%"
+                height="450px"
+              />
+            )}
           </YoutubeWrap>
           <LikeSection>
             <LikeWrap>
@@ -73,7 +72,12 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
               </p>
               <figcaption>{props.data?.fetchBoard.likeCount}</figcaption>
             </LikeWrap>
-            <DisLikeIco />
+            <LikeWrap>
+              <p onClick={props.onClickDislike}>
+                <DisLikeIco />
+              </p>
+              <figcaption>{props.data?.fetchBoard.dislikeCount}</figcaption>
+            </LikeWrap>
           </LikeSection>
         </ContentsWrap>
       </BoardContainer>

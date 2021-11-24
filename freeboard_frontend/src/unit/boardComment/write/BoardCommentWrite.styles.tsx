@@ -57,6 +57,7 @@ export const BoardCommentContents = styled.section`
 export const BoardCommentTextArea = styled.textarea`
   width: 100%;
   height: 100px;
+  padding: 15px;
   border: 1px solid #ddd;
   outline: none;
 `;
