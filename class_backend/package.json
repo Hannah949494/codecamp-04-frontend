@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@types/node": "^16.11.9",
+    "apollo-server": "^3.5.0",
+    "graphql": "^16.0.1",
     "mysql": "^2.18.1",
     "typeorm": "^0.2.41"
   }

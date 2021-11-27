@@ -147,6 +147,7 @@ export default function BoardWrite(props: CheckTypeProps) {
     if (writer !== "") Variables.updateBoardInput.writer = writer;
     if (title !== "") Variables.updateBoardInput.title = title;
     if (contents !== "") Variables.updateBoardInput.contents = contents;
+    if (youtubeurl !== "") Variables.updateBoardInput.youtubeUrl = youtubeurl;
 
     console.log(router.query.boardId);
 
