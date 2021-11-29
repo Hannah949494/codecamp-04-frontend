@@ -1,3 +1,5 @@
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 import {
   BoardContainer,
   BoardContents,
@@ -23,12 +25,17 @@ import {
   SubmitBtnWrap,
   TextInput,
 } from "../../../../styles/boards";
-import { CheckTypeProps, WriteContainer } from "./BoardWriteTypes";
+import { WriteContainer } from "./BoardWriteTypes";
 
 export default function BoardWirteUI(props: WriteContainer) {
   console.log(props.data);
   return (
     <>
+      {props.isOpen && (
+        <Modal visible={true}>
+          <DaumPostcode onComplete={props.onCompleteAddressSearch} />
+        </Modal>
+      )}
       <BoardContainer>
         <BoardTitleSection>
           {!props.isEdit && <h1>게시글 작성하기</h1>}
@@ -89,12 +96,30 @@ export default function BoardWirteUI(props: WriteContainer) {
           <SearchPostalCode>
             <SearchPostalcodeInput
               type="text"
-              placeholder="07250"
+              readOnly
+              value={
+                props.zipcode ||
+                props.data?.fetchBoard.boardAddress?.zipcode ||
+                ""
+              }
             ></SearchPostalcodeInput>
-            <SearchPostalcodeBtn href="#">우편번호 검색</SearchPostalcodeBtn>
+            <SearchPostalcodeBtn href="#" onClick={props.onClickAddressSearch}>
+              우편번호 검색
+            </SearchPostalcodeBtn>
           </SearchPostalCode>
-          <TextInput />
-          <TextInput />
+          <TextInput
+            value={
+              props.address ||
+              props.data?.fetchBoard.boardAddress?.address ||
+              ""
+            }
+          />
+          <TextInput
+            onChange={props.onChangeAddressDetail}
+            defaultValue={
+              props.data?.fetchBoard.boardAddress?.addressDetail || ""
+            }
+          />
         </InputSection>
 
         <InputSection>

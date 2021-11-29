@@ -116,6 +116,10 @@ export const SearchPostalcodeBtn = styled.a`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
+
+  &:hover {
+    color: #fff;
+  }
 `;
 
 export const SearchPostalcodeInput = styled.input`

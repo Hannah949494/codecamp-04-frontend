@@ -7,18 +7,6 @@ export default function ModalAddressPage() {
   const [myAddress, setMyAddress] = useState("");
   const [myZonecode, setMyZonecode] = useState("");
 
-  //   const showModal = () => {
-  //     setIsOpen((prev) => !prev);
-  //   };
-
-  //   const handleOk = () => {
-  //     setIsOpen((prev) => !prev);
-  //   };
-
-  //   const handleCancel = () => {
-  //     setIsOpen((prev) => !prev);
-  //   };
-
   const onToggleModal = () => {
     setIsOpen((prev) => !prev);
   };

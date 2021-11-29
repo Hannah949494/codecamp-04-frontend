@@ -4,11 +4,23 @@ export interface CheckTypeProps {
   isEdit: boolean;
   data?: any;
 }
+export interface IMyUpdateBoardInput {
+  title?: string;
+  contents?: string;
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode?: string;
+    address?: string;
+    addressDetail?: string;
+  };
+  images?: string[];
+}
 
 export interface IVariables {
-  writer?: String;
-  title?: String;
-  contents?: String;
+  title?: string;
+  writer?: string;
+  contents?: string;
+  youtubeUrl?: string;
 }
 
 export interface WriteContainer {
@@ -17,6 +29,9 @@ export interface WriteContainer {
   putTitledata: (event: ChangeEvent<HTMLInputElement>) => void;
   putYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
   putWContentsdata: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onClickAddressSearch: () => void;
+  onCompleteAddressSearch: (data: any) => void;
+  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   checkNullinput: () => void;
   checknullwriter: String;
   checknulltitle: String;
@@ -26,6 +41,10 @@ export interface WriteContainer {
   isEdit: boolean;
   data: any;
   isActive: boolean;
+  isOpen: boolean;
+  zipcode: string;
+  address: string;
+  addressDetail: string;
 }
 export interface ISubmitButtonProps {
   isActive: boolean;

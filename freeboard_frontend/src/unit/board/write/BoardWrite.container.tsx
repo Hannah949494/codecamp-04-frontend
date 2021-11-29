@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.quries";
 import BoardWirteUI from "./BoardWrite.presenter";
-import { ChangeEvent } from "react";
-import { CheckTypeProps, IVariables, WriteContainer } from "./BoardWriteTypes";
+import { CheckTypeProps, IVariables } from "./BoardWriteTypes";
 
 export default function BoardWrite(props: CheckTypeProps) {
   const router = useRouter();
@@ -20,12 +19,10 @@ export default function BoardWrite(props: CheckTypeProps) {
   const [checknullcontents, setChecknullcontents] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [youtubeurl, setYoutubeurl] = useState("");
-  const [myInputs, setMyInputs] = useState({
-    writer: "",
-    password: "",
-    title: "",
-    content: "",
-  });
+  const [isOpen, setIsOpen] = useState(false);
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   function putWriterdata(event: ChangeEvent<HTMLInputElement>) {
     setWriter(event.target.value);
@@ -103,6 +100,20 @@ export default function BoardWrite(props: CheckTypeProps) {
     setYoutubeurl(event.target.value);
   }
 
+  function onChangeAddressDetail(event: ChangeEvent<HTMLInputElement>) {
+    setAddressDetail(event.target.value);
+  }
+
+  function onClickAddressSearch() {
+    setIsOpen(true);
+  }
+
+  function onCompleteAddressSearch(data: any) {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  }
+
   async function checkNullinput() {
     if (writer === "") {
       setChecknullwirter("작성자명을 입력하세요.");
@@ -129,6 +140,11 @@ export default function BoardWrite(props: CheckTypeProps) {
             title: title,
             contents: contents,
             youtubeUrl: youtubeurl,
+            boardAddress: {
+              zipcode: zipcode,
+              address: address,
+              addressDetail: addressDetail,
+            },
           },
         },
       });
@@ -139,21 +155,21 @@ export default function BoardWrite(props: CheckTypeProps) {
   async function updateBoardContent() {
     // 수정하기
 
-    const Variables = {
-      boardId: router.query.boardId,
-      password: password,
-      updateBoardInput: {},
-    };
-    if (writer !== "") Variables.updateBoardInput.writer = writer;
-    if (title !== "") Variables.updateBoardInput.title = title;
-    if (contents !== "") Variables.updateBoardInput.contents = contents;
-    if (youtubeurl !== "") Variables.updateBoardInput.youtubeUrl = youtubeurl;
+    const Variables: IVariables = {};
+    if (writer !== "") Variables.writer = writer;
+    if (title !== "") Variables.title = title;
+    if (contents !== "") Variables.contents = contents;
+    if (youtubeurl !== "") Variables.youtubeUrl = youtubeurl;
 
     console.log(router.query.boardId);
 
     try {
-      const result = await updateBoard({
-        variables: Variables,
+      await updateBoard({
+        variables: {
+          boardId: router.query.boardId,
+          password: password,
+          updateBoardInput: Variables,
+        },
       });
       alert("게시물 수정이 완료되었습니다.");
       router.push(`/boards/detail/${router.query.boardId}`);
@@ -178,6 +194,12 @@ export default function BoardWrite(props: CheckTypeProps) {
       isEdit={props.isEdit}
       data={props.data}
       isActive={isActive}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      isOpen={isOpen}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
     />
   );
 }
