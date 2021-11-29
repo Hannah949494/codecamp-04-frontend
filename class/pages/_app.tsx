@@ -3,6 +3,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { AppProps } from "next/dist/shared/lib/router/router";
+import "antd/dist/antd.css";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
