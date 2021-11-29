@@ -114,7 +114,7 @@ export const SearchButton = styled.button`
   color: #fff;
   border: none;
   font-size: 0.865rem;
-  margin-left: 20px;
+  margin-left: 5px;
 `;
 
 export const DatePick = styled(Space)`

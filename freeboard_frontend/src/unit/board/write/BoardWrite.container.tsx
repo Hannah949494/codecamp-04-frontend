@@ -196,6 +196,7 @@ export default function BoardWrite(props: CheckTypeProps) {
       isActive={isActive}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeAddressDetail={onChangeAddressDetail}
       isOpen={isOpen}
       zipcode={zipcode}
       address={address}
