@@ -11,4 +11,9 @@ export const Header = styled.header`
   width: 100%;
   padding: 30px;
   height: 100px;
+
+  &.fixed {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 `;

@@ -1,5 +1,10 @@
 import "../styles/globals.css";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  InMemoryCache,
+} from "@apollo/client";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { Global } from "@emotion/react";
@@ -7,6 +12,8 @@ import { AppProps } from "next/dist/shared/lib/router/router";
 import "antd/dist/antd.css";
 import Layout from "../src/components/commons/layout";
 import { globalStyles } from "../src/commons/styles/globalStyles";
+import { createContext, useState } from "react";
+import { createUploadLink } from "apollo-upload-client";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,19 +29,40 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
+export const GlobalContext = createContext(null);
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [myAccessToken, setMyAccessToken] = useState("");
+  const [myUserInfo, setMyUserInfo] = useState({});
+  const myValue = {
+    accessToken: myAccessToken,
+    setAccessToken: setMyAccessToken,
+    userInfo: myUserInfo,
+    setUserInfo: setMyUserInfo,
+  };
+
+  // const uploadLink = createUploadLink({
+  //   url: "http://backend04.codebootcamp.co.kr/graphql",
+  //   headers: { authorization: `Bearer ${myAccessToken}` },
+  // });
+  const uploadLink = createUploadLink({
+    uri: "http://backend04.codebootcamp.co.kr/graphql",
+    headers: { authorization: `Bearer ${myAccessToken}` },
+  });
+
   const client = new ApolloClient({
-    uri: "http://example.codebootcamp.co.kr/graphql",
+    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   });
   return (
-    <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <GlobalContext.Provider value={myValue}>
+      <ApolloProvider client={client}>
+        <Global styles={globalStyles} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </GlobalContext.Provider>
   );
 }
 
