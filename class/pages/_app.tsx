@@ -12,7 +12,13 @@ import { AppProps } from "next/dist/shared/lib/router/router";
 import "antd/dist/antd.css";
 import Layout from "../src/components/commons/layout";
 import { globalStyles } from "../src/commons/styles/globalStyles";
-import { createContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { createUploadLink } from "apollo-upload-client";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,24 +33,38 @@ const firebaseConfig = {
   appId: "1:875969612855:web:3a01dbbd20133b478703b2",
 };
 
+interface IGlobalContext {
+  accessToken?: String;
+  setAccessToken?: Dispatch<SetStateAction<string>>;
+}
+
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
-export const GlobalContext = createContext(null);
+export const GlobalContext = createContext<IGlobalContext>({});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [myAccessToken, setMyAccessToken] = useState("");
-  const [myUserInfo, setMyUserInfo] = useState({});
+  //const [myUserInfo, setMyUserInfo] = useState({});
   const myValue = {
     accessToken: myAccessToken,
     setAccessToken: setMyAccessToken,
-    userInfo: myUserInfo,
-    setUserInfo: setMyUserInfo,
+    //userInfo: myUserInfo,
+    //setUserInfo: setMyUserInfo,
   };
 
-  // const uploadLink = createUploadLink({
-  //   url: "http://backend04.codebootcamp.co.kr/graphql",
-  //   headers: { authorization: `Bearer ${myAccessToken}` },
-  // });
+  // if(typeof window !== "undefined"){
+
+  // }
+
+  // if(process.browser){
+
+  // }
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken") || "";
+    if (accessToken != "") setMyAccessToken(accessToken);
+  });
+
   const uploadLink = createUploadLink({
     uri: "http://backend04.codebootcamp.co.kr/graphql",
     headers: { authorization: `Bearer ${myAccessToken}` },
