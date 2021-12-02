@@ -9,7 +9,8 @@ export default function Paginations01(props: IPaginations01Props) {
 
   function onClickPage(event: MouseEvent<HTMLSpanElement>) {
     if (!(event.target instanceof Element)) return;
-    //const activedPage = Number(event.target.id);
+    const activedPage = Number(event.target.id);
+    setActivedPage(activedPage);
     props.refetch({ page: activedPage });
   }
 
