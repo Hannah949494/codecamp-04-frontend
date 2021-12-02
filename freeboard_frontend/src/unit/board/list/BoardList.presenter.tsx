@@ -78,13 +78,13 @@ export default function BoardListUI(props: IBoardListUIProps) {
             게시물 등록하기
           </B.WriteButton>
         </B.WriteButtonWrap>
-        <Paginations01
-          refetch={props.refetch}
-          count={props.count}
-          startPage={props.startPage}
-          setStartPage={props.setStartPage}
-        />
       </B.BoardListWrap>
+      <Paginations01
+        refetch={props.refetch}
+        count={props.count}
+        startPage={props.startPage}
+        setStartPage={props.setStartPage}
+      />
     </B.ListWrapper>
   );
 }

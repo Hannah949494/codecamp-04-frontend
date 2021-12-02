@@ -6,6 +6,12 @@ export const ListWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 100px 50px;
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
 `;
 
 export const BestListWRap = styled.ul`
