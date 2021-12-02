@@ -44,12 +44,12 @@ export const GlobalContext = createContext<IGlobalContext>({});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [myAccessToken, setMyAccessToken] = useState("");
-  //const [myUserInfo, setMyUserInfo] = useState({});
+  const [myUserInfo, setMyUserInfo] = useState({});
   const myValue = {
     accessToken: myAccessToken,
     setAccessToken: setMyAccessToken,
-    //userInfo: myUserInfo,
-    //setUserInfo: setMyUserInfo,
+    userInfo: myUserInfo,
+    setUserInfo: setMyUserInfo,
   };
 
   // if(typeof window !== "undefined"){

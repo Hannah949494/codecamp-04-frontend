@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useContext, useState } from "react";
 import {
@@ -15,16 +15,27 @@ const LOGIN_USER = gql`
   }
 `;
 
-export default function loginPage() {
-  const { setAccessToken, accessToken } = useContext(GlobalContext);
-  console.log(accessToken);
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      email
+      name
+      picture
+    }
+  }
+`;
 
+export default function loginPage() {
+  const { setAccessToken, setUserInfo } = useContext(GlobalContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser] = useMutation<
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
+
+  const client = useApolloClient();
+
   const router = useRouter();
 
   function onChangeEmail(event: ChangeEvent<HTMLInputElement>) {
@@ -42,13 +53,23 @@ export default function loginPage() {
         password,
       },
     });
-    console.log(result);
-    localStorage.setItem(
-      "accessToken",
-      result.data?.loginUser.accessToken || ""
-    );
+    const accessToken = result.data?.loginUser.accessToken || "";
+    localStorage.setItem("accessToken", accessToken);
 
-    setAccessToken(result.data?.loginUser.accessToken || "");
+    setAccessToken?.(accessToken);
+
+    //const result = await axios.get("koreanjson.com/posts/1") 이러한 방식으로 원하는 곳에서 useQuery 필요
+
+    const resultUserInfo = await client.query({
+      query: FETCH_USER_LOGGED_IN,
+      context: {
+        headers: {
+          authrization: `Bearer ${accessToken}`,
+        },
+      },
+    });
+    setUserInfo(resultUserInfo.data.fetchUserLoggedIn);
+
     // result.data?.loginUser.accessToken;
     // 여기서 setAccessToken 필요! (글로벌 스테이트에..)
     // 로그인 성공 페이지로 이동
@@ -56,7 +77,7 @@ export default function loginPage() {
     // const result = fetchUserLoggedIn();
     // setUserInfo(result.data?.fetchUserLoggedIn);
 
-    router.push("/23-05-login-success");
+    router.push("/24-02-login-success");
   }
 
   return (

@@ -14,8 +14,8 @@ const FETCH_USER_LOGGED_IN = gql`
 
 function LoginSuccessPage() {
   const { data } =
-    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
-  console.log(data?.fetchUserLoggedIn.name);
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN); // 모든게 자동ㅛ
+
   return (
     <>
       <div>로그인에 성공하셨습니다!</div>
