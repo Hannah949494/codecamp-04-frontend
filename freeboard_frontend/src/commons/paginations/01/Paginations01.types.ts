@@ -1,4 +1,3 @@
-
 import { ApolloQueryResult } from "@apollo/client";
 import { Dispatch, MouseEvent, SetStateAction } from "react";
 import {
@@ -10,7 +9,7 @@ export interface IPaginations01Props {
   count?: number;
   refetch: (
     variables: Partial<IQueryFetchBoardsArgs>
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   startPage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
 }

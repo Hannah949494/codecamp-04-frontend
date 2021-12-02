@@ -36,6 +36,8 @@ const firebaseConfig = {
 interface IGlobalContext {
   accessToken?: String;
   setAccessToken?: Dispatch<SetStateAction<string>>;
+  userInfo?: {};
+  setUserInfo?: Dispatch<SetStateAction<{}>>;
 }
 
 // Initialize Firebase
