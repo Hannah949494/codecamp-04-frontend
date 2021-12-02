@@ -1,11 +1,12 @@
 import { FETCH_BOARDS, FETCH_BOARDS_OF_BEST } from "./BoardList.quries";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import BoardListUI from "./BoardList.presenter";
 
 export default function BoardList() {
   const router = useRouter();
+  const [startPage, setStartPage] = useState(1);
   const { data } = useQuery(FETCH_BOARDS);
   const { data: bestdata } = useQuery(FETCH_BOARDS_OF_BEST);
 
@@ -31,6 +32,8 @@ export default function BoardList() {
       MoveToBestDetailPage={MoveToBestDetailPage}
       MoveToDetailPage={MoveToDetailPage}
       MoveToWritePage={MoveToWritePage}
+      startPage={startPage}
+      setStartPage={setStartPage}
     />
   );
 }

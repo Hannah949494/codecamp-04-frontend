@@ -1,6 +1,7 @@
 import * as B from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardListTypes";
 import { DatePicker, Space } from "antd";
+import Paginations01 from "../../../commons/paginations/01/Paginations01.container";
 
 const { RangePicker } = DatePicker;
 
@@ -77,6 +78,12 @@ export default function BoardListUI(props: IBoardListUIProps) {
             게시물 등록하기
           </B.WriteButton>
         </B.WriteButtonWrap>
+        <Paginations01
+          refetch={props.refetch}
+          count={props.count}
+          startPage={props.startPage}
+          setStartPage={props.setStartPage}
+        />
       </B.BoardListWrap>
     </B.ListWrapper>
   );
