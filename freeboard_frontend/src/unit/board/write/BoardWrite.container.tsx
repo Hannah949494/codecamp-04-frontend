@@ -148,7 +148,7 @@ export default function BoardWrite(props: CheckTypeProps) {
           },
         },
       });
-      router.push(`/boards/detail/${result.data.createBoard._id}`);
+      router.push(`/portfolio/boards/detail/${result.data.createBoard._id}`);
     }
   }
 
@@ -172,7 +172,7 @@ export default function BoardWrite(props: CheckTypeProps) {
         },
       });
       alert("게시물 수정이 완료되었습니다.");
-      router.push(`/boards/detail/${router.query.boardId}`);
+      router.push(`/portfolio/boards/detail/${router.query.boardId}`);
     } catch {
       alert("실패");
     }

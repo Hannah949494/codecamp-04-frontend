@@ -1,79 +1,36 @@
 import * as B from "./Banner.styles";
-import Slider from "react-slick";
-import Typist from "react-typist";
-import { useState, useEffect } from "react";
-import "slick-carousel/slick/slick.css";
-import "react-typist/dist/Typist.css";
+import { useRouter } from "next/router";
 export default function BannerSectionUI() {
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    autoplay: true,
-    speed: 2000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-  const [count, setCount] = useState(1);
-
-  useEffect(() => {
-    // document.title = `You clicked ${count} times`;
-    console.log("Count: " + count);
-    setCount(1);
-  }, [count]);
-
+  const router = useRouter();
+  function onClickMoveToMarket() {
+    router.push("/portfolio/usedmarket");
+  }
+  function onClickMoveToBoards() {
+    router.push("/portfolio/boards/list");
+  }
   return (
     <>
-      <Slider {...settings}>
-        <B.Banner>
-          <B.BannerText>
-            <B.BannerTextInner>
-              <B.TypistWrapper>
-                {count ? (
-                  <Typist avgTypingDelay={100} onTypingDone={() => setCount(0)}>
-                    <B.BannerTitle>끊임없이 공부하는</B.BannerTitle>
-                    <Typist.Backspace count={9} delay={1200} />
-                    <B.BannerTitle>노력을 즐겨하는</B.BannerTitle>
-                    <Typist.Backspace count={9} delay={1200} />
-                    <B.BannerTitle>협업을 좋아하는</B.BannerTitle>
-                    <Typist.Delay ms={1200} onTypingDone={1200} />
-                  </Typist>
-                ) : (
-                  ""
-                )}
-                <div>
-                  <B.BannerTitle>Front-End Junior Developer</B.BannerTitle>
-                </div>
-              </B.TypistWrapper>
-              <B.BannerTitle>정혜민 입니다.</B.BannerTitle>
-            </B.BannerTextInner>
-          </B.BannerText>
-        </B.Banner>
-        <B.Banner2>
-          <B.BannerText>
-            <B.BannerTextInner>
-              <B.TypistWrapper>
-                {count ? (
-                  <Typist avgTypingDelay={100} onTypingDone={() => setCount(0)}>
-                    <B.BannerTitle>끊임없이 공부하는</B.BannerTitle>
-                    <Typist.Backspace count={9} delay={1200} />
-                    <B.BannerTitle>노력을 즐겨하는</B.BannerTitle>
-                    <Typist.Backspace count={9} delay={1200} />
-                    <B.BannerTitle>협업을 좋아하는</B.BannerTitle>
-                    <Typist.Delay ms={1200} onTypingDone={1200} />
-                  </Typist>
-                ) : (
-                  ""
-                )}
-                <div>
-                  <B.BannerTitle>Front-End Junior Developer</B.BannerTitle>
-                </div>
-              </B.TypistWrapper>
-              <B.BannerTitle>정혜민 입니다.</B.BannerTitle>
-            </B.BannerTextInner>
-          </B.BannerText>
-        </B.Banner2>
-      </Slider>
+      <B.Banner>
+        <B.BannerText>
+          <B.BannerTextInner>
+            <B.BannerSubTit>Talent Sharing</B.BannerSubTit>
+            <B.BannerTitle>
+              당신이 원하는 <span>전문가</span>를
+              <br />
+              여기서 찾아보세요!
+            </B.BannerTitle>
+            <br />
+            <B.ButtonWrap>
+              <B.BannerButton onClick={onClickMoveToBoards}>
+                직접 전문가 찾기
+              </B.BannerButton>
+              <B.BannerButton onClick={onClickMoveToMarket}>
+                전문가 구경하러 가기
+              </B.BannerButton>
+            </B.ButtonWrap>
+          </B.BannerTextInner>
+        </B.BannerText>
+      </B.Banner>
     </>
   );
 }

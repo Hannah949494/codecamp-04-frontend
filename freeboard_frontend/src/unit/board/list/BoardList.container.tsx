@@ -27,18 +27,18 @@ export default function BoardList() {
   const { data: bestdata } = useQuery(FETCH_BOARDS_OF_BEST);
 
   function MoveToDetailPage(event: MouseEvent<HTMLDivElement>) {
-    router.push(`/boards/detail/${event.target.id}`);
+    router.push(`/portfolio/boards/detail/${event.target.id}`);
     console.log(router);
   }
 
   function MoveToBestDetailPage(event: MouseEvent<HTMLDivElement>) {
     console.log(`${event.target.id}`);
-    router.push(`/boards/detail/${event.target.id}`);
+    router.push(`/portfolio/boards/detail/${event.target.id}`);
     //router.push(`/boards/${bestdata.fetchBoardsOfTheBest._id}`);
   }
 
   function MoveToWritePage(event: MouseEvent<HTMLDivElement>) {
-    router.push("/boards/new");
+    router.push("/portfolio/boards/new");
   }
 
   return (

@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 
 export const Banner = styled.section`
   width: 100%;
-  height: 100vh;
-  background-image: url("/images/portfolio/common/banner.png");
+  height: 600px;
+  background-image: url("/images/portfolio/sub/sub-banner.png");
+  background-position: center bottom;
 `;
 
 export const BannerText = styled.div`
@@ -35,7 +36,7 @@ export const BannerTitle = styled.h2`
 `;
 
 export const BannerSubTit = styled.h5`
-  font-size: 1.25rem;
+  font-size: 1.875rem;
   font-weight: bold;
   color: #d9bd88;
 `;

@@ -47,11 +47,11 @@ export default function BoardDetail() {
   NewDataContainer = NewData + " " + NewTime;
 
   function MoveToList() {
-    router.push("/boards/list");
+    router.push("/portfolio/boards/list");
   }
 
   function MoveToEditPage() {
-    router.push(`/boards/detail/${router.query.boardId}/edit`);
+    router.push(`/portfolio/boards/detail/${router.query.boardId}/edit`);
   }
 
   async function onClickDelete() {
@@ -59,7 +59,7 @@ export default function BoardDetail() {
       await deleteBoard({
         variables: { boardId: router.query.boardId },
       });
-      router.push("/boards/list");
+      router.push("/portfolio/boards/list");
       alert("게시글이 삭제되었습니다.");
     } catch {
       alert("실패");

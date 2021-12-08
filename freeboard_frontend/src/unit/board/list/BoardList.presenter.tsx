@@ -17,7 +17,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
 
   return (
     <B.ListWrapper>
-      <B.BestListWRap>
+      {/* <B.BestListWRap>
         {props.bestdata?.fetchBoardsOfTheBest.map((el) => (
           <B.BestListCard key={el._id}>
             <B.BestListConts>
@@ -42,7 +42,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
             </B.BestListConts>
           </B.BestListCard>
         ))}
-      </B.BestListWRap>
+      </B.BestListWRap> */}
       <B.BoardListWrap>
         <B.BoardSearchWrapper>
           <B.BoardSearchInput type="text" placeholder="검색어를 입력하세요" />

@@ -26,6 +26,7 @@ export default function Layout(props: ILayoutProps) {
   return (
     <>
       {!isHiddenHeader && <Header />}
+      <MainHeader />
       <BannerSection />
       <Contents>{props.children}</Contents>
       <Footer />
