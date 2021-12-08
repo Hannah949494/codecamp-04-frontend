@@ -20,6 +20,7 @@ import {
   UserInfoWrap,
   UserName,
   YoutubeWrap,
+  Image,
 } from "../../../../../styles/boards";
 import { IBoardDetailUIProps } from "./BoardDetailTypes";
 
@@ -39,21 +40,13 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
         </BoardContsProfileWrap>
         <ContentsWrap>
           <Slider {...props.settings}>
-            <ImageSliderWrap>
-              <img src="/images/images.jpeg" />
-            </ImageSliderWrap>
-
-            <ImageSliderWrap>
-              <img src="/images/images.jpeg" />
-            </ImageSliderWrap>
-
-            <ImageSliderWrap>
-              <img src="/images/images.jpeg" />
-            </ImageSliderWrap>
-
-            <ImageSliderWrap>
-              <img src="/images/images.jpeg" />
-            </ImageSliderWrap>
+            {props.data?.fetchBoard.images
+              ?.filter((el: string) => el)
+              .map((el: string) => (
+                <ImageSliderWrap key={el}>
+                  <Image src={`https://storage.googleapis.com/${el}`} />
+                </ImageSliderWrap>
+              ))}
           </Slider>
           <ContentText>{props.data?.fetchBoard.contents}</ContentText>
           <YoutubeWrap>

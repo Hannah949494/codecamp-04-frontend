@@ -157,13 +157,13 @@ export default function BoardWrite(props: CheckTypeProps) {
   async function updateBoardContent() {
     // 수정하기
 
-    const Variables: IVariables = {};
+    const Variables: IVariables = {
+      images: fileUrls,
+    };
     if (writer !== "") Variables.writer = writer;
     if (title !== "") Variables.title = title;
     if (contents !== "") Variables.contents = contents;
     if (youtubeurl !== "") Variables.youtubeUrl = youtubeurl;
-
-    console.log(router.query.boardId);
 
     try {
       await updateBoard({
@@ -175,8 +175,8 @@ export default function BoardWrite(props: CheckTypeProps) {
       });
       alert("게시물 수정이 완료되었습니다.");
       router.push(`/portfolio/boards/detail/${router.query.boardId}`);
-    } catch {
-      alert("실패");
+    } catch (error) {
+      alert(error.message);
     }
   }
 
@@ -200,22 +200,22 @@ export default function BoardWrite(props: CheckTypeProps) {
       putWContentsdata={putWContentsdata}
       putYoutubeUrl={putYoutubeUrl}
       checkNullinput={checkNullinput}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeAddressDetail={onChangeAddressDetail}
+      updateBoardContent={updateBoardContent}
+      onChangeFileUrls={onChangeFileUrls}
       checknullwriter={checknullwriter}
       checknulltitle={checknulltitle}
       checknullpassword={checknullpassword}
       checknullcontents={checknullcontents}
-      updateBoardContent={updateBoardContent}
       isEdit={props.isEdit}
       data={props.data}
       isActive={isActive}
-      onClickAddressSearch={onClickAddressSearch}
-      onCompleteAddressSearch={onCompleteAddressSearch}
-      onChangeAddressDetail={onChangeAddressDetail}
       isOpen={isOpen}
       zipcode={zipcode}
       address={address}
       addressDetail={addressDetail}
-      onChangeFileUrls={onChangeFileUrls}
       fileUrls={fileUrls}
     />
   );

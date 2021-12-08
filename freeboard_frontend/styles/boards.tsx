@@ -303,6 +303,11 @@ export const ImageSliderWrap = styled.div`
     width: 100%;
   }
 `;
+export const Image = styled.img`
+  width: 996px;
+  height: 480px;
+  margin-bottom: 30px;
+`;
 export const ContentText = styled.div`
   padding: 70px 0;
   font-size: 18px;

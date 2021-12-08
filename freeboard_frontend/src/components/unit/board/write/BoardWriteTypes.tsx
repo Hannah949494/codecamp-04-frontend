@@ -21,6 +21,7 @@ export interface IVariables {
   writer?: string;
   contents?: string;
   youtubeUrl?: string;
+  images?: string[];
 }
 
 export interface WriteContainer {
@@ -46,7 +47,6 @@ export interface WriteContainer {
   zipcode: string;
   address: string;
   addressDetail: string;
-
   fileUrls: string[];
 }
 export interface ISubmitButtonProps {
