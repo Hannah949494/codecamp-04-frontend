@@ -1,6 +1,6 @@
 import { Global } from "@emotion/react";
 // import "../styles/reset.css";
-import Layout from "../src/commons/layout";
+import Layout from "../src/components/commons/layout";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import { AppProps } from "next/dist/shared/lib/router/router";

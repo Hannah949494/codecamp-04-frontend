@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { UserCircle, ThumbsUp, ThumbsDown } from "@emotion-icons/fa-solid";
-import { ISubmitButtonProps } from "../src/unit/board/write/BoardWriteTypes";
+import { ISubmitButtonProps } from "../src/components/unit/board/write/BoardWriteTypes";
 
 export const DetailContainer = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const BoardContainer = styled.div`
   width: 100%;
   max-width: 1200px;
-  margin: 100px auto 30px;
+  margin: 0px auto 30px;
   padding: 80px 102px;
   background: #fff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);

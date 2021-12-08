@@ -1,5 +1,5 @@
-import BoardWrite from "../../../../../../src/unit/board/write/BoardWrite.container";
-import { FETCH_BOARD } from "../../../../../../src/unit/board/detail/BoardDetail.quries";
+import BoardWrite from "../../../../../../src/components/unit/board/write/BoardWrite.container";
+import { FETCH_BOARD } from "../../../../../../src/components/unit/board/detail/BoardDetail.quries";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 
