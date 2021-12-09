@@ -1,5 +1,6 @@
 import * as B from "./Banner.styles";
 import { useRouter } from "next/router";
+import { Fade } from "react-awesome-reveal";
 export default function BannerSectionUI() {
   const router = useRouter();
   function onClickMoveToMarket() {
@@ -13,12 +14,16 @@ export default function BannerSectionUI() {
       <B.Banner>
         <B.BannerText>
           <B.BannerTextInner>
-            <B.BannerSubTit>Talent Sharing</B.BannerSubTit>
-            <B.BannerTitle>
-              당신이 원하는 <span>전문가</span>를
-              <br />
-              여기서 찾아보세요!
-            </B.BannerTitle>
+            <Fade direction="up">
+              <B.BannerSubTit>Talent Sharing</B.BannerSubTit>
+            </Fade>
+            <Fade direction="up" delay={1000}>
+              <B.BannerTitle>
+                당신이 원하는 <span>전문가</span>를
+                <br />
+                여기서 찾아보세요!
+              </B.BannerTitle>
+            </Fade>
             <br />
             <B.ButtonWrap>
               <B.BannerButton onClick={onClickMoveToBoards}>
