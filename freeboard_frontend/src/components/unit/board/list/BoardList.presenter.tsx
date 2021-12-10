@@ -6,14 +6,14 @@ import Paginations01 from "../../../commons/paginations/01/Paginations01.contain
 const { RangePicker } = DatePicker;
 
 export default function BoardListUI(props: IBoardListUIProps) {
-  function onChange(value, dateString) {
-    console.log("Selected Time: ", value);
-    console.log("Formatted Selected Time: ", dateString);
-  }
+  // function onChange(value, dateString) {
+  //   console.log("Selected Time: ", value);
+  //   console.log("Formatted Selected Time: ", dateString);
+  // }
 
-  function onOk(value) {
-    console.log("onOk: ", value);
-  }
+  // function onOk(value) {
+  //   console.log("onOk: ", value);
+  // }
 
   return (
     <B.ListWrapper>
@@ -46,14 +46,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
       <B.BoardListWrap>
         <B.BoardSearchWrapper>
           <B.BoardSearchInput type="text" placeholder="검색어를 입력하세요" />
-          <B.DatePick direction="vertical" size={12}>
+          {/* <B.DatePick direction="vertical" size={12}>
             <RangePicker
               showTime={{ format: "HH:mm" }}
               format="YYYY-MM-DD HH:mm"
               onChange={onChange}
               onOk={onOk}
             />
-          </B.DatePick>
+          </B.DatePick> */}
           <B.SearchButton>검색하기</B.SearchButton>
         </B.BoardSearchWrapper>
         <B.BoardListType>

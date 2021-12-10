@@ -8,7 +8,7 @@ export const NavigationList = styled.ul`
   a {
     display: block;
     padding: 10px 20px;
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: #d9bd88;
   }
 `;

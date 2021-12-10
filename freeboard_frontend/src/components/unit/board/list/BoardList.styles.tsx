@@ -99,12 +99,12 @@ export const BestContsContents = styled.p`
 export const BoardSearchWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: flex-end;
   width: 100%;
   padding: 20px 0;
 `;
 export const BoardSearchInput = styled.input`
-  width: 50%;
+  width: 30%;
   height: 40px;
   border: 1px solid #ddd;
   margin-right: 20px;

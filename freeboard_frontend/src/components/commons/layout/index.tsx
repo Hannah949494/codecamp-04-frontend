@@ -1,11 +1,11 @@
 import { ILayoutProps } from "./Layout.types";
 import { useRouter } from "next/router";
-import Header from "./header/Header.container";
-import BannerSection from "./banner/Banner.container";
+import Header from "./header/portfolio/Header.container";
+import BannerSection from "./banner/portfolio/Banner.container";
 import Footer from "./footer/Footer.container";
 import styled from "@emotion/styled";
-import MainHeader from "./mainheader/MainHeader.container";
-import MainBannerSection from "./mainBanner/Banner.container";
+import MainHeader from "./header/main/MainHeader.container";
+import MainBannerSection from "./banner/main/Banner.container";
 import SubBannerSection from "./banner/subbanner/Banner.container";
 
 const Contents = styled.section`

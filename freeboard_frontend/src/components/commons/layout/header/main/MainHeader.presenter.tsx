@@ -1,4 +1,4 @@
-import Navigation from "../mainNavigation/Navigation.container";
+import Navigation from "../../navigation/main/Navigation.container";
 import * as H from "./MainHeader.styles";
 export default function MainHeaderUI() {
   return (
