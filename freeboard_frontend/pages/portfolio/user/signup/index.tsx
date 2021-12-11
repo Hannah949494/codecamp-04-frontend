@@ -1,8 +1,9 @@
-export default function SignUpPage() {
+import Signup from "../../../../src/components/commons/user/signup/Signup.container";
+
+export default function SignupPage() {
   return (
     <>
-      <h1>회원가입페이지!!</h1>
-      <div>회원가입!!!!!</div>
+      <Signup />
     </>
   );
 }
