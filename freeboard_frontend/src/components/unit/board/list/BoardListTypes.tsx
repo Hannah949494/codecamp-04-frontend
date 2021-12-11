@@ -1,17 +1,14 @@
-import { MouseEvent } from "react";
+import { MouseEvent, Dispatch, SetStateAction } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 import { ApolloQueryResult } from "@apollo/client";
-import { Dispatch, SetStateAction } from "react";
 
 export interface IBoardListUIProps {
-  data?: any;
-  bestdata?: any;
-  el: any;
-  MoveToWritePage: () => void;
+  data?: Pick<IQuery, "fetchBoards">;
+  MoveToWritePage: (event: MouseEvent<HTMLButtonElement>) => void;
   MoveToBestDetailPage: (event: MouseEvent<HTMLDivElement>) => void;
   MoveToDetailPage: (event: MouseEvent<HTMLDivElement>) => void;
   onClickPage: (event: MouseEvent<HTMLLIElement>) => void;
@@ -28,4 +25,12 @@ export interface IBoardListUIProps {
   setStartPage: Dispatch<SetStateAction<number>>;
   keyword: string;
   onChangeKeyword: (value: string) => void;
+}
+
+export interface ITextTokenProps {
+  isMatched: boolean;
+}
+
+export interface ISearchActiveProps {
+  isActive: boolean;
 }

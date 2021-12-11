@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Pen, Heart } from "@emotion-icons/fa-solid";
 import { Space } from "antd";
+import { ISearchActiveProps, ITextTokenProps } from "./BoardListTypes";
 export const ListWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -234,4 +235,13 @@ export const WriteButtonIco = styled(Pen)`
   height: 20px;
   color: #111;
   z-index: 2;
+`;
+
+export const TextToken = styled.span`
+  color: ${(props: ITextTokenProps) => (props.isMatched ? "red" : "black")};
+`;
+
+export const SearchResult = styled.div`
+  display: ${(props: ISearchActiveProps) =>
+    props.isActive ? "block" : "none"};
 `;

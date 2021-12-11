@@ -10,21 +10,9 @@ export const FETCH_BOARDS = gql`
     }
   }
 `;
-export const FETCH_BOARDS_OF_BEST = gql`
-  query {
-    fetchBoardsOfTheBest {
-      _id
-      writer
-      createdAt
-      title
-      contents
-      likeCount
-    }
-  }
-`;
 
 export const FETCH_BOARDS_COUNT = gql`
-  query fetchBoardsCount {
-    fetchBoardsCount
+  query fetchBoardsCount($search: String) {
+    fetchBoardsCount(search: $search)
   }
 `;

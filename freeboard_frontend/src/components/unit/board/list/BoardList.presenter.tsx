@@ -1,61 +1,22 @@
 import * as B from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardListTypes";
-import { DatePicker, Space } from "antd";
 import Paginations01 from "../../../commons/paginations/01/Paginations01.container";
-
-const { RangePicker } = DatePicker;
+import Searchbars01 from "../../../commons/searchbars/01/Searchbars01.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: IBoardListUIProps) {
-  // function onChange(value, dateString) {
-  //   console.log("Selected Time: ", value);
-  //   console.log("Formatted Selected Time: ", dateString);
-  // }
-
-  // function onOk(value) {
-  //   console.log("onOk: ", value);
-  // }
-
   return (
     <B.ListWrapper>
-      {/* <B.BestListWRap>
-        {props.bestdata?.fetchBoardsOfTheBest.map((el) => (
-          <B.BestListCard key={el._id}>
-            <B.BestListConts>
-              <B.ImageSection></B.ImageSection>
-              <B.BestContsTxt>
-                <B.BestContsTitle
-                  id={el._id}
-                  onClick={props.MoveToBestDetailPage}
-                >
-                  {el.title}
-                </B.BestContsTitle>
-                <B.BestContsWriter>{el.writer}</B.BestContsWriter>
-                <B.BestContsDate>{el.createdAt.slice(0, 10)}</B.BestContsDate>
-                <B.BestContsContents>{el.contents}</B.BestContsContents>
-                <B.BestLikeWrap>
-                  <p>
-                    <B.BestLikeIco />
-                  </p>
-                  <B.BestLikeTxt>{el.likeCount}</B.BestLikeTxt>
-                </B.BestLikeWrap>
-              </B.BestContsTxt>
-            </B.BestListConts>
-          </B.BestListCard>
-        ))}
-      </B.BestListWRap> */}
       <B.BoardListWrap>
-        <B.BoardSearchWrapper>
-          <B.BoardSearchInput type="text" placeholder="검색어를 입력하세요" />
-          {/* <B.DatePick direction="vertical" size={12}>
-            <RangePicker
-              showTime={{ format: "HH:mm" }}
-              format="YYYY-MM-DD HH:mm"
-              onChange={onChange}
-              onOk={onOk}
-            />
-          </B.DatePick> */}
-          <B.SearchButton>검색하기</B.SearchButton>
-        </B.BoardSearchWrapper>
+        <B.SearchResult isActive={props.keyword !== ""}>
+          &quot;{props.keyword}&quot; 에 대한 결과가 &quot;{props.count}&quot;개
+          있습니다.
+        </B.SearchResult>
+        <Searchbars01
+          refetch={props.refetch}
+          refetchBoardsCount={props.refetchBoardsCount}
+          onChangeKeyword={props.onChangeKeyword}
+        />
         <B.BoardListType>
           <B.BoardNumber>번호</B.BoardNumber>
           <div>제목</div>
@@ -66,7 +27,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
           <B.BoardList key={el._id}>
             <B.BoardNumber>{index + 1}</B.BoardNumber>
             <div id={el._id} onClick={props.MoveToDetailPage}>
-              {el.title}
+              {el.title
+                .replaceAll(props.keyword, `@#$%${props.keyword}@#$%`)
+                .split("@#$%")
+                .map((el) => (
+                  <B.TextToken key={uuidv4()} isMatched={props.keyword === el}>
+                    {el}
+                  </B.TextToken>
+                ))}
             </div>
             <B.BoardWriter>{el.writer}</B.BoardWriter>
             <B.BoardDate>{el.createdAt.slice(0, 10)}</B.BoardDate>

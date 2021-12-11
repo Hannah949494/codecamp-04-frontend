@@ -1,8 +1,4 @@
-import {
-  FETCH_BOARDS,
-  FETCH_BOARDS_OF_BEST,
-  FETCH_BOARDS_COUNT,
-} from "./BoardList.quries";
+import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.quries";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { MouseEvent, useState } from "react";
@@ -15,43 +11,46 @@ import {
 export default function BoardList() {
   const router = useRouter();
   const [startPage, setStartPage] = useState(1);
+  const [keyword, setKeyword] = useState("");
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
-  >(FETCH_BOARDS, { variables: { page: startPage } });
-  const { data: dataBoardsCount } = useQuery<
+  >(FETCH_BOARDS, { variables: { page: startPage, search: keyword } });
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
 
-  const { data: bestdata } = useQuery(FETCH_BOARDS_OF_BEST);
-
   function MoveToDetailPage(event: MouseEvent<HTMLDivElement>) {
-    router.push(`/portfolio/boards/detail/${event.target.id}`);
-    console.log(router);
+    if (event.target instanceof Element)
+      router.push(`/portfolio/boards/detail/${event.target.id}`);
   }
 
   function MoveToBestDetailPage(event: MouseEvent<HTMLDivElement>) {
-    console.log(`${event.target.id}`);
-    router.push(`/portfolio/boards/detail/${event.target.id}`);
-    //router.push(`/boards/${bestdata.fetchBoardsOfTheBest._id}`);
+    if (event.target instanceof Element)
+      router.push(`/portfolio/boards/detail/${event.target.id}`);
   }
 
-  function MoveToWritePage(event: MouseEvent<HTMLDivElement>) {
+  function MoveToWritePage(event: MouseEvent<HTMLButtonElement>) {
     router.push("/portfolio/boards/new");
+  }
+  function onChangeKeyword(value: string) {
+    setKeyword(value);
   }
 
   return (
     <BoardListUI
       data={data}
-      bestdata={bestdata}
       count={dataBoardsCount?.fetchBoardsCount}
       refetch={refetch}
+      keyword={keyword}
+      refetchBoardsCount={refetchBoardsCount}
       startPage={startPage}
       setStartPage={setStartPage}
       MoveToBestDetailPage={MoveToBestDetailPage}
       MoveToDetailPage={MoveToDetailPage}
       MoveToWritePage={MoveToWritePage}
+      onChangeKeyword={onChangeKeyword}
     />
   );
 }

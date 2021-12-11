@@ -1,32 +1,27 @@
-import { FireFilled } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
-export const Searchbar = styled.div`
-  width: 776px;
-  height: 52px;
-  border-radius: 15px;
-  background-color: #f5f2fc;
-  padding: 0px 20px;
+export const BoardSearchWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const FireFilledIcon = styled(FireFilled)`
-  color: #5729ff;
-  font-size: 30px;
-  cursor: pointer;
-
-  :hover {
-    color: red;
-  }
-`;
-
-export const SearchbarInput = styled.input`
+  flex-wrap: wrap;
+  justify-content: flex-end;
   width: 100%;
-  height: 100%;
+  padding: 20px 0;
+`;
+export const BoardSearchInput = styled.input`
+  width: 30%;
+  height: 40px;
+  border: 1px solid #ddd;
+  margin-right: 20px;
+  font-size: 0.865rem;
+  text-indent: 10px;
+`;
+
+export const SearchButton = styled.button`
+  width: 150px;
+  height: 40px;
+  background: #111;
+  color: #fff;
   border: none;
-  outline: none;
-  background: none;
-  margin: 0px 20px;
+  font-size: 0.865rem;
+  margin-left: 5px;
 `;

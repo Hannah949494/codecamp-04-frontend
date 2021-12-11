@@ -10,19 +10,19 @@ export default function FirebasePage() {
   async function onClickSubmit() {
     getFirestore(firebaseApp);
 
-    // const board = collection(getFirestore(firebaseApp), "board");
-    // await addDoc(board, {
-    //   writer: "철수",
-    //   title: "제목입니다.",
-    //   contents: "내용입니다",
-    // });
-
-    const product = collection(getFirestore(firebaseApp), "product");
-    await addDoc(product, {
-      seller: "영희",
-      name: "애플워치",
-      contents: "애플워치다요",
+    const board = collection(getFirestore(firebaseApp), "board");
+    await addDoc(board, {
+      writer: "철수",
+      title: "제목입니다.",
+      contents: "내용입니다",
     });
+
+    // const product = collection(getFirestore(firebaseApp), "product");
+    // await addDoc(product, {
+    //   seller: "영희",
+    //   name: "애플워치",
+    //   contents: "애플워치다요",
+    // });
   }
 
   async function onClickFetch() {
@@ -31,7 +31,7 @@ export default function FirebasePage() {
     // const docs = result.docs.map((el) => el.data());
     // console.log(docs);
 
-    const product = collection(getFirestore(firebaseApp), "product");
+    const product = collection(getFirestore(firebaseApp), "board");
     const result = await getDocs(product);
     const docs = result.docs.map((el) => el.data());
     console.log(docs);

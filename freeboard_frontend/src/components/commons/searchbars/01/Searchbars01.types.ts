@@ -1,5 +1,5 @@
 import { ApolloQueryResult } from "@apollo/client";
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -18,4 +18,5 @@ export interface ISearchbars01Props {
 
 export interface ISearchbars01UIProps {
   onChangeSearchbar: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClickSearch: (event: MouseEvent<HTMLButtonElement>) => void;
 }

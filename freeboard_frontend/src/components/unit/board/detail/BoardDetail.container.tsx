@@ -89,7 +89,6 @@ export default function BoardDetail() {
       MoveToList={MoveToList}
       onClickDelete={onClickDelete}
       data={data}
-      settings={settings}
       NewDataContainer={NewDataContainer}
       MoveToEditPage={MoveToEditPage}
       onClickLike={onClickLike}

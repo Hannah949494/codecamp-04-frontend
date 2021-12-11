@@ -9,10 +9,10 @@ export default function NavigationUI() {
         <a href="#">전문가 찾기</a>
       </li> */}
       <li>
-        <a href="">login</a>
+        <a href="/portfolio/user/login">login</a>
       </li>
       <li>
-        <a href="">sign up</a>
+        <a href="/portfolio/user/signup">sign up</a>
       </li>
     </N.NavigationList>
   );

@@ -10,8 +10,6 @@ import {
   Errormessage,
   HalfType,
   HalfTypeWrap,
-  ImageBox,
-  ImageBoxList,
   ImageBoxWrap,
   InputSection,
   MainTypeRadio,
