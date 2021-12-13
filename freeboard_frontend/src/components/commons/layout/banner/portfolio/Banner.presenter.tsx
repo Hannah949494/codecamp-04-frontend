@@ -1,13 +1,28 @@
 import * as B from "./Banner.styles";
 import { useRouter } from "next/router";
 import { Fade } from "react-awesome-reveal";
+import { withAuth } from "../../../hocs/withAuth";
+import { refreshTokenCheck } from "../../../../../commons/libraries/userAccess";
 export default function BannerSectionUI() {
   const router = useRouter();
   function onClickMoveToMarket() {
+    if(refreshTokenCheck()){
     router.push("/portfolio/usedmarket");
+    }else{
+    alert("로그인이 필요한 서비스입니다! 로그인 해주세요")
+    router.push("/portfolio/user/login");
+  }
+
   }
   function onClickMoveToBoards() {
-    router.push("/portfolio/boards/list");
+    
+    if(refreshTokenCheck()){
+      router.push("/portfolio/boards/list");
+    
+  }else{
+    alert("로그인이 필요한 서비스입니다! 로그인 해주세요")
+    router.push("/portfolio/user/login");
+  }
   }
   return (
     <>

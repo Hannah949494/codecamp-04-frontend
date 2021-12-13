@@ -1,66 +1,58 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import router from "next/router";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { ChangeEvent, useContext, useState } from "react";
+import { gql, useMutation } from "@apollo/client";
+import {
+  IMutation,
+  IMutationLoginUserArgs,
+} from "../../../../src/commons/types/generated/types";
+import { GlobalContext } from "../../../_app";
+import { useRouter } from "next/router";
 
-interface FormValues {
-  myEmail: string;
-  myPassword: string;
-}
-
-const schema = yup.object().shape({
-  myEmail: yup
-    .string()
-    .email("이메일 형식이 적합하지 않습니다.")
-    .required("반드시 입력해야하는 필수 사항입니다."),
-  myPassword: yup
-    .string()
-    .min(8, "비밀번호는 최소 4자리 이상 최대 15자리 이하 입니다.")
-    .max(15)
-    .required("반드시 입력해야하는 필수 사항입니다."),
-});
+const LOGIN_USER = gql`
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      accessToken
+    }
+  }
+`;
 
 export default function LoginPage() {
-  const { handleSubmit, register, formState } = useForm({
-    mode: "onChange",
-    resolver: yupResolver(schema),
-  });
+  const router = useRouter();
+  const { setAccessToken } = useContext(GlobalContext);
 
-  function onClickLogin(data: FormValues) {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, data.myEmail, data.myPassword)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+  const [myEmail, setMyEmail] = useState("");
+  const [myPassword, setMyPassword] = useState("");
+  const [loginUser] = useMutation<
+    Pick<IMutation, "loginUser">,
+    IMutationLoginUserArgs
+  >(LOGIN_USER);
+
+  function onChangeMyEmail(event: ChangeEvent<HTMLInputElement>) {
+    setMyEmail(event.target.value);
   }
-  function onClickMovetoSignup() {
-    router.push("/portfolio/user/signup");
+
+  function onChangeMyPassword(event: ChangeEvent<HTMLInputElement>) {
+    setMyPassword(event.target.value);
+  }
+
+  async function onClickLogin() {
+    const result = await loginUser({
+      variables: {
+        email: myEmail,
+        password: myPassword,
+      },
+    });
+    localStorage.setItem("refreshToken", "true");
+    setAccessToken?.(result.data?.loginUser.accessToken || ""); // 여기서 setAccesToken 필요! (글로벌 스테이트에...)
+
+    alert("로그인에 성공하셨습니다!")
+    router.push("/portfolio/boards/list");
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit(onClickLogin)}>
-        <label htmlFor="">이메일 :</label>{" "}
-        <input type="text" {...register("myEmail")} />
-        <p>{formState.errors.myEmail?.message}</p>
-        <label htmlFor="">패스워드 :</label>{" "}
-        <input type="password" {...register("myPassword")} />
-        <p>{formState.errors.myPassword?.message}</p>
-        <button>로그인하기</button>
-      </form>
-      <p>
-        아이디가 없으십니까?{" "}
-        <button onClick={onClickMovetoSignup}>회원가입 하러가기</button>
-      </p>
+      이메일: <input type="text" onChange={onChangeMyEmail} />
+      비밀번호: <input type="password" onChange={onChangeMyPassword} />
+      <button onClick={onClickLogin}>로그인하기!!</button>
     </>
   );
 }

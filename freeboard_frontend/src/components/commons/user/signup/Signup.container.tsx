@@ -7,6 +7,19 @@ import { Modal } from "antd";
 import { FormValues } from "./Signup.types";
 import SignupUI from "./Signup.presenter";
 import { useEffect, useState } from "react";
+import { gql, useMutation } from "@apollo/client"
+
+const CREATE_USER = gql`
+    mutation createUser($createUserInput: CreateUserInput!) {
+      createUser(createUserInput: $createUserInput) {
+        email
+        name
+        _id
+      }
+    }
+`;
+
+
 
 const schema = yup.object().shape({
   userName: yup.string().required("반드시 입력해야하는 필수 사항입니다."),
@@ -30,6 +43,7 @@ const schema = yup.object().shape({
 
 export default function Signup() {
   const [isActive, setIsActive] = useState(false);
+  const [createUser] = useMutation(CREATE_USER)
   const { handleSubmit, register, formState } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -46,16 +60,24 @@ export default function Signup() {
   });
 
   async function onClickSignup(data: FormValues) {
-    const auth = getAuth();
-    try {
-      await createUserWithEmailAndPassword(auth, data.myEmail, data.myPassword);
-      Modal.success({ title: "회원가입이 정상적으로 완료되었습니다!" });
-      router.push("/portfolio/boards/list");
-    } catch (error) {
-      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
-        return alert("이미 존재하는 이메일입니다.");
-      }
-    }
+    try {const result = await createUser({
+        variables : {
+          createUserInput : {
+            name : data.userName,
+            email : data.myEmail,
+            password : data.myPassword
+          }
+        }
+        
+    })
+    alert("회원가입이 완료되었습니다!")
+    console.log(props.myAccessToken)
+    router.push("/portfolio/boards/list")
+  }
+    catch(error){
+      Modal.error({title : error.message})
+  }
+  
   }
 
   return (

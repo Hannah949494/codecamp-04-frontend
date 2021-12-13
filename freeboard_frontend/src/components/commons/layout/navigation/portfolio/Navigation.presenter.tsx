@@ -1,5 +1,11 @@
+
 import * as N from "./Navigation.styles";
-export default function NavigationUI() {
+import {refreshTokenCheck, signout} from "../../../../../commons/libraries/userAccess"
+
+export default function NavigationUI(props: any) {
+
+
+
   return (
     <N.NavigationList>
       {/* <li>
@@ -8,11 +14,12 @@ export default function NavigationUI() {
       <li>
         <a href="#">전문가 찾기</a>
       </li> */}
+      
       <li>
-        <a href="/portfolio/user/login">login</a>
+         {!refreshTokenCheck() ? <a href="/portfolio/user/login">login</a> : <a href="/portfolio" onClick={signout}>Signout</a>}
       </li>
       <li>
-        <a href="/portfolio/user/signup">sign up</a>
+      {!refreshTokenCheck() ? <a href="/portfolio/user/signup">sign up</a> : <a href="/portfolio/user/signup">Mypage</a> }
       </li>
     </N.NavigationList>
   );
