@@ -18,7 +18,8 @@ const Contents = styled.section`
 
 const MAIN_ONLY = ["/"];
 const PORTFOLIO_MAIN_ONLY = ["/portfolio"];
-const SUBPAGE_ONLY = ["/portfolio/boards"] || ["/portfolio/usedmarket"] 
+const SUBPAGE_ONLY = ["/portfolio/boards"]
+
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function Layout(props: ILayoutProps) {
   const isMainOnly = MAIN_ONLY.includes(router.asPath);
   const isPortfolioOnly = PORTFOLIO_MAIN_ONLY.includes(router.asPath);
   const isSubPageOnly = SUBPAGE_ONLY.includes(router.asPath);
+  console.log(isSubPageOnly)
   return (
     <>
       {!isMainOnly ? <Header /> : <MainHeader />}
@@ -39,7 +41,7 @@ export default function Layout(props: ILayoutProps) {
       ) : (
         <MainBannerSection />
       )}
-      {!isSubPageOnly ? <SubNavigation /> : ""}
+      {!isPortfolioOnly ? (!isSubPageOnly? (<SubNavigation />) : ("") ) : <div></div> }
       <Contents>{props.children}</Contents>
       <Footer />
     </>

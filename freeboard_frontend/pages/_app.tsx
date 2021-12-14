@@ -21,6 +21,7 @@ import {
 import { onError } from "@apollo/client/link/error";
 import "../styles/fonts/NotoSansKR/NotoSansKR.css";
 import { getAccessToken } from "../src/commons/libraries/getAccessToken";
+import Topbutton from "../src/components/commons/buttons/topbutton/TopButton";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCGeNwypYpeEEWSz5vZ9GdPiFwl5IbGoR4",
@@ -97,6 +98,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Topbutton />
     </ApolloProvider>
     </GlobalContext.Provider>
   );
