@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <B.ListWrapper>
+      <h1>프로젝트 리스트</h1>
       <B.BoardListWrap>
         <B.SearchResult isActive={props.keyword !== ""}>
           &quot;{props.keyword}&quot; 에 대한 결과가 &quot;{props.count}&quot;개

@@ -23,7 +23,7 @@ export default function BoardList() {
 
   function MoveToDetailPage(event: MouseEvent<HTMLDivElement>) {
     if (event.target instanceof Element)
-      router.push(`/portfolio/boards/detail/${event.target.id}`);
+      router.push(`/portfolio/boards/detail/${event.currentTarget.id}`);
   }
 
   function MoveToBestDetailPage(event: MouseEvent<HTMLDivElement>) {

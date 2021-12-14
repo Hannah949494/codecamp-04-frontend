@@ -1,6 +1,7 @@
 
 import * as N from "./Navigation.styles";
 import {refreshTokenCheck, signout} from "../../../../../commons/libraries/userAccess"
+import { Button } from "antd";
 
 export default function NavigationUI(props: any) {
 
@@ -14,12 +15,14 @@ export default function NavigationUI(props: any) {
       <li>
         <a href="#">전문가 찾기</a>
       </li> */}
-      
+      {refreshTokenCheck() ? <li>
+        <p><span>{props.data?.fetchUserLoggedIn.name}</span> 님 어서오세요!</p>
+      </li> : "" }
       <li>
-         {!refreshTokenCheck() ? <a href="/portfolio/user/login">login</a> : <a href="/portfolio" onClick={signout}>Signout</a>}
+         {!refreshTokenCheck() ? <button onClick={props.onClickLogin}>login</button> : <button onClick={props.onClickLogout}>Logout</button>}
       </li>
       <li>
-      {!refreshTokenCheck() ? <a href="/portfolio/user/signup">sign up</a> : <a href="/portfolio/user/signup">Mypage</a> }
+      {!refreshTokenCheck() ? <button onClick={props.onClickSignup}>Sign Up</button> : <button onClick={props.onClickSignup}>My Page</button> }
       </li>
     </N.NavigationList>
   );

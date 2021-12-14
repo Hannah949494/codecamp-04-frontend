@@ -177,7 +177,7 @@ export const BoardList = styled.li`
     text-align: center;
     font-size: 15px;
   }
-  &:nth-child(odd) {
+  &:nth-of-type(odd) {
     background: #ececec;
   }
 

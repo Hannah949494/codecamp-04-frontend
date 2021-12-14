@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import MainHeader from "./header/main/MainHeader.container";
 import MainBannerSection from "./banner/main/Banner.container";
 import SubBannerSection from "./banner/subbanner/Banner.container";
+import SubNavigation from "./navigation/snb/Navigation.container";
 
 const Contents = styled.section`
   width: 100%;
@@ -17,6 +18,7 @@ const Contents = styled.section`
 
 const MAIN_ONLY = ["/"];
 const PORTFOLIO_MAIN_ONLY = ["/portfolio"];
+const SUBPAGE_ONLY = ["/portfolio/boards"] || ["/portfolio/usedmarket"] 
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
@@ -24,7 +26,7 @@ export default function Layout(props: ILayoutProps) {
 
   const isMainOnly = MAIN_ONLY.includes(router.asPath);
   const isPortfolioOnly = PORTFOLIO_MAIN_ONLY.includes(router.asPath);
-
+  const isSubPageOnly = SUBPAGE_ONLY.includes(router.asPath);
   return (
     <>
       {!isMainOnly ? <Header /> : <MainHeader />}
@@ -37,6 +39,7 @@ export default function Layout(props: ILayoutProps) {
       ) : (
         <MainBannerSection />
       )}
+      {!isSubPageOnly ? <SubNavigation /> : ""}
       <Contents>{props.children}</Contents>
       <Footer />
     </>

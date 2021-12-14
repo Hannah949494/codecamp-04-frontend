@@ -49,8 +49,10 @@ export const BannerButton = styled.button`
   padding: 5px 15px;
   background: transparent;
   border: 2px solid #ddd;
-  border-radius: 10px;
+  border-radius: 15px;
   transition: 0.5s;
+  line-height:36px;
+  font-size:16px;
   &:hover {
     border-color: #d9bd88;
     background-color: #d9bd88;
