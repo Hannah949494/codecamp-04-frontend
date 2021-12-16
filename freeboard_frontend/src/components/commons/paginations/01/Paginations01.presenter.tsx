@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Page, Pagination } from "./Paginations01.styles";
 import { IPaginations01UIProps } from "./Paginations01.types";
 export default function Paginations01UI(props: IPaginations01UIProps) {
