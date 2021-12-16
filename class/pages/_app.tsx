@@ -20,6 +20,8 @@ import {
   useState,
 } from "react";
 import { createUploadLink } from "apollo-upload-client";
+import * as Sentry from "@sentry/nextjs";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -75,6 +77,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
+  });
+
+  Sentry.init({
+    dsn: "https://991a145910c644f5b673bee7a86839fe@o1091871.ingest.sentry.io/6109496",
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
   });
   return (
     <GlobalContext.Provider value={myValue}>
