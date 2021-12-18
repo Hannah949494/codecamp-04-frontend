@@ -42,6 +42,8 @@ const FETCH_USED_ITEMS = gql`
   }
 `;
 
+const ERROR_IMAGE = "/images/portfolio/sub/freelancer/noimage.png";
+
 export default function FreeLancerListPage() {
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditemsOfTheBest">,
@@ -106,6 +108,10 @@ export default function FreeLancerListPage() {
     });
   }
 
+  function onErrorimage(event) {
+    event.target.src = ERROR_IMAGE;
+  }
+
   function onClicktoDetail(event: MouseEvent<HTMLLIElement>) {
     router.push(`/portfolio/freelancer/detail/${event.currentTarget.id}`);
   }
@@ -123,6 +129,7 @@ export default function FreeLancerListPage() {
                     <img
                       src={`https://storage.googleapis.com/${el.images[0]}`}
                       alt=""
+                      onError={onErrorimage}
                     />
                   </p>
                   <F.BestListCardConts>
@@ -143,23 +150,21 @@ export default function FreeLancerListPage() {
             ))}
           </Slider>
         </F.BestList>
+        <div>
+          <input type="text" placeholder="검색어를 입력하세요!" />
+          <button>검색</button>
+        </div>
 
         <F.FreelancerList>
           {useditemsData?.fetchUseditems.map((el, index) => (
             <li key={el._id}>
               <F.FreeLancerListCard id={el._id} onClick={onClicktoDetail}>
                 <p>
-                  {el.images[0] ? (
-                    <img
-                      src={`https://storage.googleapis.com/${el.images[0]}`}
-                      alt=""
-                    />
-                  ) : (
-                    <img
-                      src="/images/portfolio/sub/freelancer/noimage.png"
-                      alt=""
-                    />
-                  )}
+                  <img
+                    src={`https://storage.googleapis.com/${el.images[0]}`}
+                    onError={onErrorimage}
+                    alt=""
+                  />
                 </p>
                 <F.FreeLancerListCardConts>
                   <dl>
