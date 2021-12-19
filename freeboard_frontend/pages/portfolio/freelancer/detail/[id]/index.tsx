@@ -1,15 +1,17 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import Dompurify from "dompurify";
 import { useState } from "react";
-
 import * as F from "../../../../../src/components/unit/freelancer/detail/freelancerDetail.styles";
-import { getDate } from "../../../../../src/commons/libraries/utils";
+
+export const sanitize = (html: string): string => Dompurify.sanitize(html);
+
 const FETCH_USED_ITEM_DETAIL = gql`
   query fetchUseditem($useditemId: ID!) {
     fetchUseditem(useditemId: $useditemId) {
       _id
       seller {
+        _id
         name
       }
       name
@@ -26,12 +28,22 @@ const FETCH_USED_ITEM_DETAIL = gql`
   }
 `;
 
+export const DELETE_PRODUCT = gql`
+  mutation deleteUseditem($useditemId: ID!) {
+    deleteUseditem(useditemId: $useditemId)
+  }
+`;
+
 export default function FreelancerDetailPage() {
   const router = useRouter();
+
   const { data } = useQuery(FETCH_USED_ITEM_DETAIL, {
     variables: { useditemId: router.query.id },
   });
+
   const [activeIndex, setActiveIndex] = useState(0);
+  const [deleteUseditem] = useMutation(DELETE_PRODUCT);
+
   const TAB_CONS_ARR = [
     {
       tabTitle: (
@@ -93,6 +105,18 @@ export default function FreelancerDetailPage() {
     setActiveIndex(index);
   };
 
+  async function deleteProduct() {
+    try {
+      await deleteUseditem({
+        variables: { useditemId: router.query.id },
+      });
+      router.push("/portfolio/freelancer/list");
+      alert("제품이 삭제되었습니다.");
+    } catch {
+      alert("실패");
+    }
+  }
+
   return (
     <>
       {/* <div>
@@ -119,6 +143,7 @@ export default function FreelancerDetailPage() {
             <F.SellerName>{data?.fetchUseditem.seller.name}</F.SellerName>
             <p>{data?.fetchUseditem.remarks}</p>
           </F.contsTxtSec>
+          <button onClick={deleteProduct}>글 삭제</button>
         </F.ContsHeader>
 
         <F.ContsBody>

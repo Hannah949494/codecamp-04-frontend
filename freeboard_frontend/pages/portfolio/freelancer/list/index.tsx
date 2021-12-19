@@ -7,8 +7,7 @@ import * as F from "../../../../src/components/unit/freelancer/list/freelancerLi
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState, MouseEvent } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { MouseEvent } from "react";
 import router from "next/router";
 
 const FETCH_USEDBESTITEMS = gql`
@@ -108,12 +107,16 @@ export default function FreeLancerListPage() {
     });
   }
 
-  function onErrorimage(event) {
+  function onErrorimage(event: any) {
     event.target.src = ERROR_IMAGE;
   }
 
   function onClicktoDetail(event: MouseEvent<HTMLLIElement>) {
     router.push(`/portfolio/freelancer/detail/${event.currentTarget.id}`);
+  }
+
+  function onClickWrite(event: MouseEvent<HTMLButtonElement>) {
+    router.push("/portfolio/freelancer/write");
   }
 
   return (
@@ -153,6 +156,7 @@ export default function FreeLancerListPage() {
         <div>
           <input type="text" placeholder="검색어를 입력하세요!" />
           <button>검색</button>
+          <button onClick={onClickWrite}>글 작성</button>
         </div>
 
         <F.FreelancerList>

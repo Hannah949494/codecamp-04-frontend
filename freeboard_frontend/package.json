@@ -37,6 +37,7 @@
     "react-hook-form": "^7.21.2",
     "react-infinite-scroller": "^1.2.4",
     "react-player": "^2.9.0",
+    "react-quill": "^1.3.5",
     "react-reveal": "^1.2.2",
     "react-slick": "^0.28.1",
     "react-typist": "^2.0.5",
