@@ -39,3 +39,11 @@ export const MapWrapper = styled.div`
     padding: 0 20px;
   }
 `;
+
+export const Input = styled.input`
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  border: 1px solid #ebebeb;
+  text-indent: 10px;
+`;

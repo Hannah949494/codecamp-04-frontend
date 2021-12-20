@@ -7,26 +7,22 @@ import {
   Wrapper,
   WriteHeader,
   WriteWrap,
+  Input,
 } from "../../../../src/components/unit/freelancer/write/freelancerWrite.styles";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Modal } from "antd";
-import Input01 from "../../../../src/components/commons/inputs/01/input01";
+import { useState } from "react";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
 } from "../../../../src/commons/types/generated/types";
-
+import { v4 as uuidv4 } from "uuid";
+import Uploads01 from "../../../../src/components/commons/uploads/01/Uploads01.container";
 const CREATE_PRODUCT = gql`
   mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
     createUseditem(createUseditemInput: $createUseditemInput) {
       _id
-      name
-      contents
-      price
-      images
-      remarks
-      tags
     }
   }
 `;
@@ -73,6 +69,7 @@ interface FormValues {
   contents: string;
   price: number;
   remarks: string;
+  tags: [string];
 }
 
 export default function FreelancerWritePage() {
@@ -85,11 +82,11 @@ export default function FreelancerWritePage() {
     mode: "onChange",
   });
 
-  function handleChange(value: string) {
-    console.log(value);
+  const handleChange = (value: string) => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
-  }
+  };
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   async function onClickSubmit(data: FormValues) {
     try {
@@ -97,9 +94,11 @@ export default function FreelancerWritePage() {
         variables: {
           createUseditemInput: {
             name: data.name,
-            contents: data.contents,
-            price: data.price,
             remarks: data.remarks,
+            price: data.price,
+            contents: data.contents,
+            tags: data.tags,
+            images: fileUrls,
           },
         },
       });
@@ -108,20 +107,28 @@ export default function FreelancerWritePage() {
       router.push("/portfolio/freelancer/list");
     } catch (error) {
       Modal.error({ title: error.message });
+      console.log(data);
     }
+  }
+
+  function onChangeFileUrls(fileUrl: string, index: number) {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   }
   return (
     <>
-      <Wrapper>
-        <div>
-          <WriteHeader>
-            <h2>상품 등록하기</h2>
-          </WriteHeader>
-        </div>
-        <form onSubmit={handleSubmit(onClickSubmit)}>
+      <form onSubmit={handleSubmit(onClickSubmit)}>
+        <Wrapper>
+          <div>
+            <WriteHeader>
+              <h2>상품 등록하기</h2>
+            </WriteHeader>
+          </div>
+
           <WriteWrap>
             <label htmlFor="">상품명</label>
-            <Input01
+            <Input
               type="text"
               placeholder="상품명을 입력해주세요."
               {...register("name")}
@@ -130,7 +137,7 @@ export default function FreelancerWritePage() {
 
           <WriteWrap>
             <label htmlFor="">한줄요약</label>
-            <Input01
+            <Input
               type="text"
               placeholder="상품내용을 한줄로 정리해주세요"
               {...register("remarks")}
@@ -148,16 +155,18 @@ export default function FreelancerWritePage() {
 
           <WriteWrap>
             <label htmlFor="">판매가격</label>
-            <Input01
+            <Input
               type="number"
               placeholder="가격 입력"
-              {...register("price")}
+              {...register("price", {
+                valueAsNumber: true,
+              })}
             />
           </WriteWrap>
 
           <WriteWrap>
             <label htmlFor="">해쉬태그 입력</label>
-            <Input01
+            <Input
               type="text"
               placeholder="해쉬태그 입력해주세요"
               {...register("tags")}
@@ -170,14 +179,27 @@ export default function FreelancerWritePage() {
               <div>지도 들어갈곳</div>
               <div>
                 <label htmlFor="">주소</label>
-                <Input01 type="text" />
-                <Input01 type="text" />
+                <Input type="text" />
+                <Input type="text" />
               </div>
             </MapWrapper>
+            <div>
+              <label>사진첨부</label>
+              <div>
+                {fileUrls.map((el, index) => (
+                  <Uploads01
+                    key={uuidv4()}
+                    index={index}
+                    fileUrl={el}
+                    onChangeFileUrls={onChangeFileUrls}
+                  />
+                ))}
+              </div>
+            </div>
           </WriteWrap>
           <button>제품 등록</button>
-        </form>
-      </Wrapper>
+        </Wrapper>
+      </form>
     </>
   );
 }
