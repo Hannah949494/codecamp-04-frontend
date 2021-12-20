@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MouseEvent } from "react";
 import router from "next/router";
+import Searchbars01 from "../../../../src/components/commons/searchbars/01/Searchbars01.container";
 
 const FETCH_USEDBESTITEMS = gql`
   query fetchUsedItemsOfTheBest {
@@ -44,14 +45,18 @@ const FETCH_USED_ITEMS = gql`
 const ERROR_IMAGE = "/images/portfolio/sub/freelancer/noimage.png";
 
 export default function FreeLancerListPage() {
+  // const [keyword, setKeyword] = useState("");
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditemsOfTheBest">,
     IQueryFetchUseditemsArgs
   >(FETCH_USEDBESTITEMS);
-  const { data: useditemsData, fetchMore } = useQuery<
-    Pick<IQuery, "fetchUseditems">,
-    IQueryFetchUseditemsArgs
-  >(FETCH_USED_ITEMS);
+  const {
+    data: useditemsData,
+    fetchMore,
+    refetch,
+  } = useQuery<Pick<IQuery, "fetchUseditems">, IQueryFetchUseditemsArgs>(
+    FETCH_USED_ITEMS
+  );
   const settings = {
     dots: false,
     infinitie: true,
@@ -118,6 +123,9 @@ export default function FreeLancerListPage() {
   function onClickWrite(event: MouseEvent<HTMLButtonElement>) {
     router.push("/portfolio/freelancer/write");
   }
+  function onChangeKeyword(value: string) {
+    setKeyword(value);
+  }
 
   return (
     <>
@@ -156,8 +164,9 @@ export default function FreeLancerListPage() {
         <div>
           <input type="text" placeholder="검색어를 입력하세요!" />
           <button>검색</button>
-          <button onClick={onClickWrite}>글 작성</button>
         </div>
+
+        <button onClick={onClickWrite}>글 작성</button>
 
         <F.FreelancerList>
           {useditemsData?.fetchUseditems.map((el, index) => (

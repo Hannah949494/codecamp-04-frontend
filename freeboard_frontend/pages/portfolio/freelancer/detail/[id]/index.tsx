@@ -116,6 +116,11 @@ export default function FreelancerDetailPage() {
       alert("실패");
     }
   }
+  const ERROR_IMAGE = "/images/portfolio/sub/freelancer/noimage.png";
+
+  function onErrorimage(event: any) {
+    event.target.src = ERROR_IMAGE;
+  }
 
   return (
     <>
