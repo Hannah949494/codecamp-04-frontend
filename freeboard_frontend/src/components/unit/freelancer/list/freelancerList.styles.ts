@@ -127,6 +127,12 @@ export const FreelancerList = styled.ul`
     @media all and (max-width: 480px) {
       width: 100%;
     }
+    :nth-of-type(9n) {
+      display: ${(props) => (props.isLoaded ? "block" : "none")};
+    }
+    :nth-of-type(10n) {
+      display: ${(props) => (props.isLoaded ? "block" : "none")};
+    }
   }
 `;
 export const FreeLancerListCard = styled.figure`

@@ -10,8 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import router from "next/router";
 import Dompurify from "dompurify";
-import { v4 as uuidv4 } from "uuid";
-import { object } from "yup/lib/locale";
 
 const FETCH_USEDBESTITEMS = gql`
   query fetchUsedItemsOfTheBest {
@@ -44,6 +42,9 @@ const FETCH_USED_ITEMS = gql`
     }
   }
 `;
+export interface ITextTokenProps {
+  isLoaded: boolean;
+}
 
 const ERROR_IMAGE = "/images/portfolio/sub/freelancer/noimage.png";
 export const sanitize = (html: string): string => Dompurify.sanitize(html);
@@ -51,6 +52,7 @@ export const sanitize = (html: string): string => Dompurify.sanitize(html);
 export default function FreeLancerListPage() {
   const [keyword, setKeyword] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [loadmore, setLoadmore] = useState(false);
 
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditemsOfTheBest">,
@@ -116,6 +118,7 @@ export default function FreeLancerListPage() {
         };
       },
     });
+    setLoadmore(true);
   }
 
   function onClickSearch(event: MouseEvent<HTMLButtonElement>) {
@@ -143,6 +146,7 @@ export default function FreeLancerListPage() {
     <>
       <F.Wrapper>
         <F.Title>가장 인기많은 프리랜서 리스트</F.Title>
+
         <F.BestList>
           <Slider {...settings}>
             {data?.fetchUseditemsOfTheBest.map((el, index) => (
@@ -189,7 +193,7 @@ export default function FreeLancerListPage() {
           <F.WriteButton onClick={onClickWrite}>글 작성</F.WriteButton>
         </F.SearchWrap>
 
-        <F.FreelancerList>
+        <F.FreelancerList isLoaded={loadmore}>
           {useditemsData?.fetchUseditems.map((el, index) => (
             <li key={el._id}>
               <F.FreeLancerListCard id={el._id} onClick={onClicktoDetail}>
