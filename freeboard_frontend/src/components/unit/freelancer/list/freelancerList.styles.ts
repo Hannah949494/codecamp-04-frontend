@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Tags } from "@emotion-icons/fa-solid";
+import { Heart, Search, Tags } from "@emotion-icons/fa-solid";
 import InfiniteScroll from "react-infinite-scroller";
 export const Wrapper = styled.div`
   width: 100%;
@@ -22,9 +22,10 @@ export const Title = styled.h1`
 export const BestList = styled.ul`
   // display:flex;
   // flex-wrap:wrap;
-  margin: 80px 20px;
+  margin: 40px 20px;
 
   li {
+    position: relative;
     width: 25%;
     max-height: 373px;
     margin-bottom: 20px;
@@ -102,16 +103,17 @@ export const PriceTag = styled(Tags)`
 export const FreelancerList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: 80px 20px;
+  margin: 40px 20px;
 
   @media all and (max-width: 1024px) {
     margin: 80px 0;
   }
 
   li {
+    position: relative;
     width: 25%;
-    max-height: 373px;
-    margin-bottom: 20px;
+    max-height: 400px;
+    margin-bottom: 40px;
     padding: 0 10px;
 
     @media all and (max-width: 969px) {
@@ -169,7 +171,7 @@ export const FreeLancerListCardConts = styled.figcaption`
 
     dd {
       max-height: 40px;
-      padding: 10px 0;
+      padding-top: 10px;
       font-size: 15px;
       line-height: 18px;
       word-break: keep-all;
@@ -208,4 +210,75 @@ export const ReadMore = styled.p`
       color: #fff;
     }
   }
+`;
+
+export const pickedDate = styled.figure`
+  position: absolute;
+  z-index: 5;
+  top: 10px;
+  right: 25px;
+  text-align: center;
+  figcaption {
+    padding-top: 5px;
+    font-size: 14px;
+    color: #ececec;
+  }
+  &:hover {
+    figcaption {
+      color: #d9bd88;
+    }
+  }
+`;
+export const Pickheart = styled(Heart)`
+  width: 20px;
+  height: 20px;
+  color: #eee;
+
+  &:hover {
+    color: #d9bd88;
+  }
+`;
+
+export const Keyword = styled.p`
+  display: inline-block;
+  font-size: 14px;
+`;
+
+// search Bar
+
+export const SearchWrap = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1170px;
+  text-align: right;
+`;
+export const SearchInput = styled.input`
+  width: 70%;
+  height: 45px;
+  border: 1px solid #ececec;
+  text-indent: 10px;
+`;
+
+export const SearchIco = styled(Search)`
+  width: 25px;
+  height: 25px;
+  color: #333;
+`;
+
+export const SearchBtn = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
+export const WriteButton = styled.button`
+  display: block;
+  width: 150px;
+  height: 45px;
+  margin: 10px 0 0 auto;
+  border: 1px solid #ececec;
+  background-color: transparent;
+  cursor: pointer;
 `;

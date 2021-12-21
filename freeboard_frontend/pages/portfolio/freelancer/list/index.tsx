@@ -7,9 +7,11 @@ import * as F from "../../../../src/components/unit/freelancer/list/freelancerLi
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import router from "next/router";
-import Searchbars01 from "../../../../src/components/commons/searchbars/01/Searchbars01.container";
+import Dompurify from "dompurify";
+import { v4 as uuidv4 } from "uuid";
+import { object } from "yup/lib/locale";
 
 const FETCH_USEDBESTITEMS = gql`
   query fetchUsedItemsOfTheBest {
@@ -20,6 +22,7 @@ const FETCH_USEDBESTITEMS = gql`
       seller {
         name
       }
+      pickedCount
       price
       images
       createdAt
@@ -27,8 +30,8 @@ const FETCH_USEDBESTITEMS = gql`
   }
 `;
 const FETCH_USED_ITEMS = gql`
-  query fetchUsedItems($page: Int) {
-    fetchUseditems(page: $page) {
+  query fetchUsedItems($search: String, $page: Int) {
+    fetchUseditems(search: $search, page: $page) {
       _id
       name
       contents
@@ -43,9 +46,12 @@ const FETCH_USED_ITEMS = gql`
 `;
 
 const ERROR_IMAGE = "/images/portfolio/sub/freelancer/noimage.png";
+export const sanitize = (html: string): string => Dompurify.sanitize(html);
 
 export default function FreeLancerListPage() {
-  // const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
+
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditemsOfTheBest">,
     IQueryFetchUseditemsArgs
@@ -112,6 +118,15 @@ export default function FreeLancerListPage() {
     });
   }
 
+  function onClickSearch(event: MouseEvent<HTMLButtonElement>) {
+    setSearchKeyword(keyword);
+    refetch({ search: keyword });
+  }
+
+  function getSearchKeyword(event: ChangeEvent<HTMLInputElement>) {
+    setKeyword(event.target.value);
+  }
+
   function onErrorimage(event: any) {
     event.target.src = ERROR_IMAGE;
   }
@@ -123,9 +138,6 @@ export default function FreeLancerListPage() {
   function onClickWrite(event: MouseEvent<HTMLButtonElement>) {
     router.push("/portfolio/freelancer/write");
   }
-  function onChangeKeyword(value: string) {
-    setKeyword(value);
-  }
 
   return (
     <>
@@ -136,6 +148,10 @@ export default function FreeLancerListPage() {
             {data?.fetchUseditemsOfTheBest.map((el, index) => (
               <li key={el._id} id={el._id} onClick={onClicktoDetail}>
                 <F.BestListCard>
+                  <F.pickedDate>
+                    <F.Pickheart />
+                    <figcaption>{el.pickedCount}</figcaption>
+                  </F.pickedDate>
                   <p>
                     <img
                       src={`https://storage.googleapis.com/${el.images[0]}`}
@@ -161,17 +177,26 @@ export default function FreeLancerListPage() {
             ))}
           </Slider>
         </F.BestList>
-        <div>
-          <input type="text" placeholder="검색어를 입력하세요!" />
-          <button>검색</button>
-        </div>
-
-        <button onClick={onClickWrite}>글 작성</button>
+        <F.SearchWrap>
+          <F.SearchInput
+            type="text"
+            placeholder="검색어를 입력하세요!"
+            onChange={getSearchKeyword}
+          />
+          <F.SearchBtn onClick={onClickSearch}>
+            <F.SearchIco />
+          </F.SearchBtn>
+          <F.WriteButton onClick={onClickWrite}>글 작성</F.WriteButton>
+        </F.SearchWrap>
 
         <F.FreelancerList>
           {useditemsData?.fetchUseditems.map((el, index) => (
             <li key={el._id}>
               <F.FreeLancerListCard id={el._id} onClick={onClicktoDetail}>
+                <F.pickedDate>
+                  <F.Pickheart />
+                  <figcaption>{el.pickedCount}</figcaption>
+                </F.pickedDate>
                 <p>
                   <img
                     src={`https://storage.googleapis.com/${el.images[0]}`}
@@ -183,6 +208,11 @@ export default function FreeLancerListPage() {
                   <dl>
                     <dt>{index + 1}</dt>
                     <dd>{el.seller?.name}</dd>
+                    <dd
+                      dangerouslySetInnerHTML={{
+                        __html: Dompurify.sanitize(String(el.name)),
+                      }}
+                    ></dd>
                     <dd>
                       {el.price
                         ?.toString()
