@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { gql } from "graphql-request";
 export default function BoardsPage() {
   return (
     <>

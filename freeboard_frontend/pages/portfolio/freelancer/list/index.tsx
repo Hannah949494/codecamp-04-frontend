@@ -42,9 +42,6 @@ const FETCH_USED_ITEMS = gql`
     }
   }
 `;
-export interface ITextTokenProps {
-  isLoaded: boolean;
-}
 
 const ERROR_IMAGE = "/images/portfolio/sub/freelancer/noimage.png";
 export const sanitize = (html: string): string => Dompurify.sanitize(html);
