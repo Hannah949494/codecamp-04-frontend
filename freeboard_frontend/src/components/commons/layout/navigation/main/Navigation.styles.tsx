@@ -9,6 +9,6 @@ export const NavigationList = styled.ul`
     display: block;
     padding: 10px 20px;
     font-size: 1rem;
-    color: #f6f6f6;
+    color: #fff;
   }
 `;

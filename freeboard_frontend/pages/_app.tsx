@@ -22,6 +22,7 @@ import { onError } from "@apollo/client/link/error";
 import "../styles/fonts/NotoSansKR/NotoSansKR.css";
 import { getAccessToken } from "../src/commons/libraries/getAccessToken";
 import Topbutton from "../src/components/commons/buttons/topbutton/TopButton";
+import { useRouter } from "next/router";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCGeNwypYpeEEWSz5vZ9GdPiFwl5IbGoR4",
@@ -38,7 +39,7 @@ interface IGlobalContext {
   userInfo?: {
     name?: string;
     email?: string;
-    picture?: string; 
+    picture?: string;
   };
   setUserInfo?: Dispatch<SetStateAction<{}>>;
 }
@@ -51,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [myUserInfo, setMyUserInfo] = useState({});
   const myValue = {
     accessToken: myAccessToken,
-    setAccessToken : setMyAccessToken,
+    setAccessToken: setMyAccessToken,
     userInfo: myUserInfo,
     setUserInfo: setMyUserInfo,
   };
@@ -64,9 +65,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     // const accessToken = localStorage.getItem("accessToken") || "";
     // if (accessToken != "") setMyAccessToken(accessToken);
-    console.log(myAccessToken)
-    if (localStorage.getItem("refreshToken")) getAccessToken(setMyAccessToken)
-  },[]);
+    console.log(myAccessToken);
+    if (localStorage.getItem("refreshToken")) getAccessToken(setMyAccessToken);
+  }, []);
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
@@ -85,21 +86,31 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   });
 
-
+  const router = useRouter();
 
   const client = new ApolloClient({
     link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   });
+
+  const MAIN_ONLY = ["/"];
+  const isMainOnly = MAIN_ONLY.includes(router.asPath);
   return (
     <GlobalContext.Provider value={myValue}>
-    <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
-      <Layout>
+      <ApolloProvider client={client}>
+        <Global styles={globalStyles} />
+        {!isMainOnly ? (
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        ) : (
+          <Component {...pageProps} />
+        )}
+        {/* <Layout>
         <Component {...pageProps} />
-      </Layout>
-      <Topbutton />
-    </ApolloProvider>
+      </Layout> */}
+        <Topbutton />
+      </ApolloProvider>
     </GlobalContext.Provider>
   );
 }

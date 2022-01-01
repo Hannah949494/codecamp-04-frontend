@@ -11,6 +11,8 @@ export const Header = styled.header`
   width: 100%;
   padding: 30px;
   height: 100px;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
 
   &.fixed {
     position: fixed;

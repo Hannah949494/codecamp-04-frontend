@@ -13,6 +13,15 @@ export const globalStyles = css`
     scroll-behavior: smooth;
   }
 
+  body.fp-viewing-0 header {
+    background: none;
+    color: #fff;
+  }
+
+  body.fp-responsive header {
+    position: fixed;
+  }
+
   html,
   body,
   div,
