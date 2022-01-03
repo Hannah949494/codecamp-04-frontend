@@ -33,7 +33,7 @@ export default function BannerSectionUI() {
             <B.BannerTitle>Front-End Junior Developer</B.BannerTitle>
           </B.BannerTextInner>
           <B.BannerImgWrap>
-            <img src="/images/common/img_banner_char.png" />
+            {/* <img src="/images/common/img_banner_char.png" /> */}
           </B.BannerImgWrap>
         </B.BannerText>
       </B.Banner>

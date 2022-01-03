@@ -94,21 +94,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   const MAIN_ONLY = ["/"];
+
   const isMainOnly = MAIN_ONLY.includes(router.asPath);
   return (
     <GlobalContext.Provider value={myValue}>
       <ApolloProvider client={client}>
         <Global styles={globalStyles} />
-        {!isMainOnly ? (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        ) : (
+        <Layout>
           <Component {...pageProps} />
-        )}
-        {/* <Layout>
-        <Component {...pageProps} />
-      </Layout> */}
+        </Layout>
         <Topbutton />
       </ApolloProvider>
     </GlobalContext.Provider>

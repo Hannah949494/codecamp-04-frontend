@@ -10,10 +10,8 @@ import SubBannerSection from "./banner/subbanner/Banner.container";
 import SubNavigation from "./navigation/snb/Navigation.container";
 
 const Contents = styled.section`
-  width: 100%;
-  max-width: 1200px;
+  width: 100%
   margin: 0 auto;
-  padding: 100px 0;
 `;
 
 const MAIN_ONLY = ["/"];
@@ -30,7 +28,7 @@ export default function Layout(props: ILayoutProps) {
   console.log(isSubPageOnly);
   return (
     <>
-      {!isMainOnly ? <Header /> : <MainHeader />}
+      {!isMainOnly ? <Header /> : ""}
       {!isMainOnly ? (
         !isPortfolioOnly ? (
           <SubBannerSection />
@@ -38,7 +36,7 @@ export default function Layout(props: ILayoutProps) {
           <BannerSection />
         )
       ) : (
-        <MainBannerSection />
+        ""
       )}
       {!isMainOnly && !isPortfolioOnly ? (
         !isSubPageOnly ? (

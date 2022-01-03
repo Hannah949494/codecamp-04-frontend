@@ -26,6 +26,8 @@ export const Banner = styled.section`
     #c779d0,
     #feac5e
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 `;
 export const Banner2 = styled.section`
   width: 100%;
