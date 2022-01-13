@@ -38,8 +38,8 @@ export interface WriteContainer {
   updateBoardContent: () => void;
   checknullwriter: String;
   checknulltitle: String;
-  checknullpassword: String;
-  checknullcontents: String;
+  checknullpassword: string;
+  checknullcontents: string;
   isEdit: boolean;
   data: any;
   isActive: boolean;
